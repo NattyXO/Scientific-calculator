@@ -1,0 +1,17 @@
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.exe.config
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.exe.manifest
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.application
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.exe
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.pdb
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\bin\Debug\Scientific Calculator.xml
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.vbproj.AssemblyReference.cache
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific_Calculator.Form1.resources
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific_Calculator.Resources.resources
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.vbproj.GenerateResource.cache
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.vbproj.CoreCompileInputs.cache
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.TrustInfo.xml
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.exe.manifest
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.application
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.exe
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.xml
+C:\Users\NattyXO\source\repos\Scientific Calculator\scientific calc\obj\Debug\Scientific Calculator.pdb
