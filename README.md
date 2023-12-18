@@ -60,6 +60,12 @@ A scientific calculator program capable of performing basic arithmetic operation
 - The application provides functionality for basic arithmetic operations, trigonometric functions, unit conversion, and hexadecimal conversion.
 
 This summary should serve as a guide to understanding the functionalities and organization of the code in Form1. Feel free to add more detailed comments or explanations where needed to further clarify specific sections or functionalities within the code.
+## Optimizations
+
+It takes me hours of coding to handle invalid inputs and overflow exceptions.
+
+If you have the moral, you can improve labeling the button and other elements in Form 1, and you can request pull requests.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
