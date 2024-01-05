@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("scientific calc")>
-<Assembly: AssemblyDescription("natyy amn")>
+<Assembly: AssemblyTitle("Scientific Calculator")>
+<Assembly: AssemblyDescription("A beautiful, free scientific calculator with advanced features for evaluating, fractions, exponential functions, logarithms...")>
 <Assembly: AssemblyCompany("Afro tech Studio")>
-<Assembly: AssemblyProduct("scientific calc")>
+<Assembly: AssemblyProduct("Scientific Calculator")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
 <Assembly: AssemblyTrademark("")>
 
@@ -31,6 +31,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.5.2")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
-<Assembly: NeutralResourcesLanguage("am-ET")>
+<Assembly: AssemblyVersion("1.0.3")>
+<Assembly: AssemblyFileVersion("1.0.3")>
+<Assembly: NeutralResourcesLanguage("en-US")>

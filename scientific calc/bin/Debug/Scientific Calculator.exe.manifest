@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icons8_calculator.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Scientific Calculator" version="1.0.5.2" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Scientific Calculator" version="1.0.3.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="Scientific Calculator.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scientific Calculator.exe" size="102400">
-      <assemblyIdentity name="Scientific Calculator" version="1.0.5.2" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scientific Calculator.exe" size="102912">
+      <assemblyIdentity name="Scientific Calculator" version="1.0.3.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>B03Ci/n/l4xWYC2ywkZajCCVpk8X4JVoAnIoCXzC+ZM=</dsig:DigestValue>
+        <dsig:DigestValue>OufAUpDVMn5SoXAlH9BUCmGSbxWcUCr+SciSZeYmFIM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
