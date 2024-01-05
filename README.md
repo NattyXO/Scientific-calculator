@@ -1,75 +1,40 @@
 # Scientific Calculator
 A scientific calculator program capable of performing basic arithmetic operations, trigonometric functions, logarithms, unit conversions, and hexadecimal conversions, with error handling for invalid inputs and overflow exceptions.
 
-### Class: Form1
+## Features
 
-#### Variables:
-- `f`, `s`, `a`: Variables to store numeric values for arithmetic operations.
-- `op`: Stores the arithmetic operation (+, -, *, /, Mod, Exp).
-- `n`: Used for integer operations.
+- **Standard and Scientific Modes:** Switch between standard and scientific calculator modes.
+- **Arithmetic Operations:** Addition, subtraction, multiplication, and division.
+- **Trigonometric Functions:** Sine, cosine, tangent, hyperbolic sine, cosine, tangent.
+- **Exponential and Logarithmic Functions:** Exponential, logarithm base 10, and natural logarithm.
+- **Unit Conversion:** Conversion between Celsius and Fahrenheit, miles and kilometers, centimeters and meters.
+- **Binary Conversion:** Decimal to binary conversion.
+- **Memory Functionality:** Basic memory operations (clear, recall, save).
 
-#### Methods:
+## Installation
 
-##### Arithmetic Operations (`Button_Click`)
-- Handles events for numeric buttons (0-9) and decimal point (.).
-- Concatenates the clicked button's value to the displayed number.
+Go to the Release section, where you can find the executable file, and run the application.
 
-##### Clear Function (`Button14_Click`, `Button12_Click`)
-- Resets the displayed number and any ongoing arithmetic operation.
+## Usage
 
-##### Arithmetic Functions (`Arithmetic_function`)
-- Triggers arithmetic operations when an arithmetic function button is clicked (+, -, *, /, Mod, Exp).
-- Captures the first number (`f`), the operator (`op`), and updates the display for the second number.
+- **Standard Mode:** Use for basic arithmetic operations.
+- **Scientific Mode:** Access scientific functions and unit conversion options.
+- **Keyboard Shortcuts:** Refer to the keyboard shortcut reference in the application for quick inputs.
+## Contributing
 
-##### Equals/Calculate Function (`Button11_Click`)
-- Computes the result based on the stored operator and the entered numbers.
-- Handles arithmetic operations (+, -, *, /, Mod, Exp).
-- Displays the result in the label (`Label3`).
+Contributions are welcome! Fork the repository and create a pull request with your changes or enhancements.
 
-##### Decimal to Binary Conversion (`Button24_Click`)
-- Converts a decimal number to its binary representation.
-- Splits the input into integer and fractional parts.
-- Converts the integer part to binary using `Convert.ToString`.
-- Converts the fractional part by multiplying and checking bits.
-- Handles possible overflow exceptions.
+## Credits
 
-##### Trigonometric Functions (`Button19_Click`, `Button20_Click`, `Button21_Click`, `Button25_Click`)
-- Calculates the Sin, Cos, Tan, and Log functions of the entered number.
-- Displays the result in the label (`Label3`).
+- **Developer:** [NattyXO](https://github.com/NattyXO)
+- **License:** [MIT License](LICENSE)
 
-##### Unit Conversion (`Button28_Click`)
-- Performs various unit conversions based on the selected item in `ComboBox1`.
-- Handles different conversion types like Celsius to Fahrenheit, Miles to Kilometres, etc.
-- Displays the converted result in the `Unitshow` label.
-
-##### Menu Item Click Handlers
-- Control the resizing of the form based on the selected menu item.
-
-##### Form Load (`Form1_Load`)
-- Initializes the form by setting initial dimensions and populating the ComboBox with conversion options.
-
-##### Help Information (`HelpToolStripMenuItem_Click`)
-- Shows an informational message box about the application.
-
-##### Hexadecimal Conversion (`btnHex_Click`)
-- Converts the displayed number to its hexadecimal representation.
-- Displays the converted value in the label (`Label3`).
-
-#### Additional Notes:
-- Error handling is implemented to validate input and display appropriate messages for invalid input or errors.
-- The application provides functionality for basic arithmetic operations, trigonometric functions, unit conversion, and hexadecimal conversion.
-
-This summary should serve as a guide to understanding the functionalities and organization of the code in Form1. Feel free to add more detailed comments or explanations where needed to further clarify specific sections or functionalities within the code.
 ## Optimizations
 
 It takes me hours of coding to handle invalid inputs and overflow exceptions.
-
-If you have the moral, you can improve labeling the button and other elements in Form 1, and you can request pull requests.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
+You can optimise by when the user input math expression like this 3*5-2(6+8)%6/3*e-3*π+√34
+This expression convert to Standard math equation like this (3 * 5) - ((((2 * (6 + 8)) % 6) / 3) * e) - (3 * π) + √(34) = 7.7817981628
+e = Euler
 
 ## Logo
 
