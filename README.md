@@ -32,9 +32,9 @@ Contributions are welcome! Fork the repository and create a pull request with yo
 ## Optimizations
 
 It takes me hours of coding to handle invalid inputs and overflow exceptions.
-You can optimise by when the user input math expression like this 3*5-2(6+8)%6/3*e-3*π+√34
-This expression convert to Standard math equation like this (3 * 5) - ((((2 * (6 + 8)) % 6) / 3) * e) - (3 * π) + √(34) = 7.7817981628
-e = Euler
+You can optimise by when the user input math expression like this ```math 3*5-2(6+8)%6/3*e-3*π+√34 ```
+This expression convert to Standard math equation like this ```math (3 * 5) - ((((2 * (6 + 8)) % 6) / 3) * e) - (3 * π) + √(34) = 7.7817981628 ```
+```math e = Euler ```
 
 ## Logo
 
