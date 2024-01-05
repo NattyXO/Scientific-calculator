@@ -38,4 +38,4 @@ This expression convert to Standard math equation like this ```math (3 * 5) - ((
 
 ## Logo
 
-Calculator icon by Icons8
+Calculator icon by [Icons8](https://icons8.com/)
