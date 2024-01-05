@@ -13,16 +13,14 @@
         'Code for extend form
         Me.Height = 411
         Me.Width = 587
-        btnEqual.Width = 200
-        txtAnswer.Width = 403
+        txtAnswer.Width = 334
     End Sub
 
     Private Sub UnitConversionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnitConversionToolStripMenuItem.Click
         'Code for extend form
         Me.Height = 411
         Me.Width = 846
-        btnEqual.Width = 200
-        txtAnswer.Width = 403
+        txtAnswer.Width = 334
     End Sub
 
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -35,10 +33,11 @@
         'Code for extend form
         Me.Height = 411
         Me.Width = 310
-        btnEqual.Width = 131
         txtAnswer.Width = 267
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.KeyPreview = True ' Enable key events for the form
+
         Me.Height = 411
         Me.Width = 310
         btnEqual.Width = 131
@@ -278,10 +277,17 @@
     End Sub
 
     Private Sub btnEqual_Click(sender As Object, e As EventArgs) Handles btnEqual.Click
+
         lblTop.Visible = True
         Dim result As Double = Calculate(txtAnswer.Text)
         If Not Double.IsNaN(result) Then
-            lblTop.Text = result.ToString() ' Set the result to the top label
+            ' Add the result to the TreeView
+            Dim newNode As New TreeNode(result.ToString())
+            lstAnswer.Nodes.Add(newNode)
+
+            ' Set the result to the top label
+            lblTop.Text = result.ToString()
+            lblTop.Visible = True
         Else
             ' Optionally handle invalid expressions or errors here
         End If
@@ -295,6 +301,12 @@
     End Sub
 
     Private Sub btnSquareRoot_Click(sender As Object, e As EventArgs) Handles btnSquareRoot.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             MessageBox.Show("Please enter a valid number to calculate Square.")
@@ -315,9 +327,10 @@
 
 
     Private Sub NumberButton_Click(sender As Object, e As EventArgs) Handles btnInput1.Click, btnInput2.Click, btnInput9.Click, btnInput8.Click, btnInput7.Click, btnInput6.Click, btnInput5.Click, btnInput4.Click, btnInput3.Click, btnInput0.Click
-        If txtAnswer.Text = "∞" Then
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
             txtAnswer.Text = ""
-        ElseIf txtAnswer.Text = "NaN" Then
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
             txtAnswer.Text = ""
         End If
         ' Code for button 1 to 9, 0
@@ -348,6 +361,12 @@
     End Function
 
     Private Sub OperationButton_Click(sender As Object, e As EventArgs) Handles btnAddition.Click, btnMultiplication.Click, btnModules.Click, btnMinus.Click, btnDivision.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         ' Store the operator as the last input
         lastInput = DirectCast(sender, Button).Text
         dotUsed = False
@@ -356,6 +375,12 @@
         txtAnswer.Text &= $" {button.Text} "
     End Sub
     Private Sub btnPi_Click(sender As Object, e As EventArgs) Handles btnPi.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         If Not txtAnswer.Text.Contains(Math.PI.ToString()) Then
             ' Append Pi to txtAnswer
             txtAnswer.Text &= Math.PI.ToString()
@@ -370,6 +395,12 @@
 
 
     Private Sub btnEuler_Click(sender As Object, e As EventArgs) Handles btnEuler.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         If Not txtAnswer.Text.Contains(Math.E.ToString()) Then
             ' Append Pi to txtAnswer
             txtAnswer.Text &= Math.E.ToString()
@@ -386,10 +417,22 @@
 
 
     Private Sub btnLeftBracket_Click(sender As Object, e As EventArgs) Handles btnLeftBracket.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         txtAnswer.Text &= "("
     End Sub
 
     Private Sub btnRightBracket_Click(sender As Object, e As EventArgs) Handles btnRightBracket.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
         txtAnswer.Text &= ")"
     End Sub
 
@@ -585,15 +628,134 @@ Version 1.0.3(Official Build)")
     End Sub
 
     Private Sub KeyboardShortcutReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyboardShortcutReferenceToolStripMenuItem.Click
-        MessageBox.Show("You Can type from the keyboard, like 0–9 and % * / + - ( )" & Environment.NewLine & "Also, you can use the Enter key to perform a calculation.")
+
+        Dim url As String = "https://github.com/NattyXO/Scientific-calculator/blob/main/Shortcut.md"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
     End Sub
 
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        'MessageBox.Show($"You pressed key: {e.KeyCode}", "Key Pressed")
+
         ' Check if the Enter key is pressed
-        If e.KeyCode = Keys.Enter Then
-            ' Call the logic you want to perform when Enter is pressed (similar to btnEqual click)
+        If e.KeyCode = Keys.Space Then
             btnEqual.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad0 Then
+            btnInput0.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad1 Then
+            btnInput1.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad2 Then
+            btnInput2.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad3 Then
+            btnInput3.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad4 Then
+            btnInput4.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad5 Then
+            btnInput5.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad6 Then
+            btnInput6.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad7 Then
+            btnInput7.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad8 Then
+            btnInput8.PerformClick()
+        ElseIf e.KeyCode = Keys.NumPad9 Then
+            btnInput9.PerformClick()
+        ElseIf e.KeyCode = Keys.Add Then ' "+" key
+            btnAddition.PerformClick()
+        ElseIf e.KeyCode = Keys.Subtract Then ' "-" key
+            btnMinus.PerformClick()
+        ElseIf e.KeyCode = Keys.Multiply Then ' "*" key
+            btnMultiplication.PerformClick()
+        ElseIf e.KeyCode = Keys.Divide Then ' "/" key
+            btnDivision.PerformClick()
+        ElseIf e.KeyCode = Keys.OemPeriod Then ' "." key
+            btnDot.PerformClick()
+        ElseIf e.KeyCode = Keys.Decimal Then ' "." key
+            btnDot.PerformClick()
+        ElseIf e.KeyCode = Keys.OemMinus Then ' "-" key
+            btnMinus.PerformClick()
+        ElseIf e.KeyCode = Keys.Oemplus Then ' "+" key
+            btnAddition.PerformClick()
+            ' Check if Ctrl+C is pressed and a node is selected
+        ElseIf e.KeyCode = Keys.C AndAlso e.Control AndAlso lstAnswer.SelectedNode IsNot Nothing Then
+            ' Copy the selected node's text to the clipboard
+            Clipboard.SetText(lstAnswer.SelectedNode.Text)
+
+            ElseIf e.KeyCode = Keys.Back Then ' "back" key
+                btnBack.PerformClick()
+            ElseIf e.KeyCode = Keys.C Then ' "clear" key
+                btnClear.PerformClick()
+            ElseIf e.KeyCode = Keys.E Then ' "Euler" key
+                btnEuler.PerformClick()
+            ElseIf e.KeyCode = Keys.P Then ' "P" key
+                btnPi.PerformClick()
+            ElseIf e.KeyCode = Keys.OemQuestion AndAlso e.Shift Then
+                ' This handles the "/" character using Shift + ?
+                btnDivision.PerformClick() ' Triggers the left parenthesis button click
+            ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
+                ' This handles the "%" character using Shift + 9
+                btnModules.PerformClick()
+            ElseIf e.KeyCode = Keys.D9 AndAlso e.Shift Then
+                ' This handles the "(" character using Shift + 9
+                btnLeftBracket.PerformClick() ' Triggers the left parenthesis button click
+            ElseIf e.KeyCode = Keys.D0 AndAlso e.Shift Then
+                ' This handles the ")" character using Shift + 0
+                btnRightBracket.PerformClick() ' Triggers the right parenthesis button click
+                ' Check for the percent sign using its ASCII code (37)
+            ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
+                btnModules.PerformClick() ' Triggers the percent button click
+            ElseIf e.KeyCode = Keys.D8 AndAlso e.Shift Then
+                ' This handles the "*" character using Shift + 9
+                btnMultiplication.PerformClick()
+            ElseIf e.KeyCode = Keys.D0 Then
+                ' This handles the "0" character
+                btnInput0.PerformClick()
+            ElseIf e.KeyCode = Keys.D1 Then
+                ' This handles the "1" character
+                btnInput1.PerformClick()
+            ElseIf e.KeyCode = Keys.D2 Then
+                ' This handles the "2" character
+                btnInput2.PerformClick()
+            ElseIf e.KeyCode = Keys.D3 Then
+                ' This handles the "3" character
+                btnInput3.PerformClick()
+            ElseIf e.KeyCode = Keys.D4 Then
+                ' This handles the "4" character
+                btnInput4.PerformClick()
+            ElseIf e.KeyCode = Keys.D5 Then
+                ' This handles the "5" character
+                btnInput5.PerformClick()
+            ElseIf e.KeyCode = Keys.D6 Then
+                ' This handles the "6" character
+                btnInput6.PerformClick()
+            ElseIf e.KeyCode = Keys.D7 Then
+                ' This handles the "7" character
+                btnInput7.PerformClick()
+            ElseIf e.KeyCode = Keys.D8 Then
+                ' This handles the "8" character
+                btnInput8.PerformClick()
+            ElseIf e.KeyCode = Keys.D9 Then
+                ' This handles the "9" character
+                btnInput9.PerformClick()
+
         End If
+    End Sub
+
+    Private Sub AnswerHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnswerHistoryToolStripMenuItem.Click
+        'Code for extend form
+        Me.Height = 411
+        Me.Width = 587
+        txtAnswer.Width = 334
+    End Sub
+
+    Private Sub btnClearAnswerHistory_Click(sender As Object, e As EventArgs) Handles btnClearAnswerHistory.Click
+        lstAnswer.Nodes.Clear()
     End Sub
 End Class

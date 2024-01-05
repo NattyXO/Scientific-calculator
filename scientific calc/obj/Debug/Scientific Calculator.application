@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Scientific Calculator.exe.manifest" size="5148">
+    <dependentAssembly dependencyType="install" codebase="Scientific Calculator.exe.manifest" size="5149">
       <assemblyIdentity name="Scientific Calculator.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hSwIsIqBpat72BVResX5MCZ9Awv+gb1p3nzb2SCIABw=</dsig:DigestValue>
+        <dsig:DigestValue>cTSDXlXHfXs6dj9iRacMCnyEdcc6i0jQ/F8J0VXbJLM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

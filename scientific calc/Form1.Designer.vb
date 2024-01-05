@@ -23,7 +23,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.txtAnswer = New System.Windows.Forms.Label()
         Me.btnInput1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -85,22 +84,13 @@ Partial Class Form1
         Me.btnSinh = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnSquareRoot = New System.Windows.Forms.Button()
+        Me.txtAnswer = New System.Windows.Forms.Label()
+        Me.AnswerHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lstAnswer = New System.Windows.Forms.TreeView()
+        Me.btnClearAnswerHistory = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtAnswer
-        '
-        Me.txtAnswer.AllowDrop = True
-        Me.txtAnswer.BackColor = System.Drawing.Color.White
-        Me.txtAnswer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.txtAnswer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAnswer.Location = New System.Drawing.Point(21, 25)
-        Me.txtAnswer.Name = "txtAnswer"
-        Me.txtAnswer.Size = New System.Drawing.Size(266, 57)
-        Me.txtAnswer.TabIndex = 0
-        Me.txtAnswer.Text = "0"
-        Me.txtAnswer.TextAlign = System.Drawing.ContentAlignment.BottomRight
         '
         'btnInput1
         '
@@ -114,7 +104,7 @@ Partial Class Form1
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem, Me.AboutToolStripMenuItem, Me.AnswerHistoryToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(830, 24)
@@ -131,24 +121,24 @@ Partial Class Form1
         'StandardToolStripMenuItem
         '
         Me.StandardToolStripMenuItem.Name = "StandardToolStripMenuItem"
-        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.StandardToolStripMenuItem.Text = "Standard"
         '
         'ScientificToolStripMenuItem
         '
         Me.ScientificToolStripMenuItem.Name = "ScientificToolStripMenuItem"
-        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ScientificToolStripMenuItem.Text = "Scientific"
         '
         'UnitConversionToolStripMenuItem
         '
         Me.UnitConversionToolStripMenuItem.Name = "UnitConversionToolStripMenuItem"
-        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UnitConversionToolStripMenuItem.Text = "Unit Conversion"
         '
         'AboutToolStripMenuItem
         '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyboardShortcutReferenceToolStripMenuItem, Me.GithubToolStripMenuItem, Me.RealseNotesToolStripMenuItem, Me.AboutScientificCalculatorToolStripMenuItem, Me.SendFeedbackToolStripMenuItem, Me.JoinUsOnSocialMediaToolStripMenuItem})
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyboardShortcutReferenceToolStripMenuItem, Me.GithubToolStripMenuItem, Me.SendFeedbackToolStripMenuItem, Me.JoinUsOnSocialMediaToolStripMenuItem, Me.RealseNotesToolStripMenuItem, Me.AboutScientificCalculatorToolStripMenuItem})
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
         Me.AboutToolStripMenuItem.Text = "About Us"
@@ -169,7 +159,7 @@ Partial Class Form1
         '
         Me.RealseNotesToolStripMenuItem.Name = "RealseNotesToolStripMenuItem"
         Me.RealseNotesToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
-        Me.RealseNotesToolStripMenuItem.Text = "Realse Notes"
+        Me.RealseNotesToolStripMenuItem.Text = "Release Notes"
         '
         'AboutScientificCalculatorToolStripMenuItem
         '
@@ -187,13 +177,13 @@ Partial Class Form1
         'ReportAProblemToolStripMenuItem
         '
         Me.ReportAProblemToolStripMenuItem.Name = "ReportAProblemToolStripMenuItem"
-        Me.ReportAProblemToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ReportAProblemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ReportAProblemToolStripMenuItem.Text = "Report a Problem..."
         '
         'SuggestAFeatureToolStripMenuItem
         '
         Me.SuggestAFeatureToolStripMenuItem.Name = "SuggestAFeatureToolStripMenuItem"
-        Me.SuggestAFeatureToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.SuggestAFeatureToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SuggestAFeatureToolStripMenuItem.Text = "Suggest a Feature"
         '
         'JoinUsOnSocialMediaToolStripMenuItem
@@ -206,19 +196,19 @@ Partial Class Form1
         'YoutubeToolStripMenuItem
         '
         Me.YoutubeToolStripMenuItem.Name = "YoutubeToolStripMenuItem"
-        Me.YoutubeToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.YoutubeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.YoutubeToolStripMenuItem.Text = "Youtube"
         '
         'LinkedinToolStripMenuItem
         '
         Me.LinkedinToolStripMenuItem.Name = "LinkedinToolStripMenuItem"
-        Me.LinkedinToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.LinkedinToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LinkedinToolStripMenuItem.Text = "Linkedin"
         '
         'FacebookToolStripMenuItem
         '
         Me.FacebookToolStripMenuItem.Name = "FacebookToolStripMenuItem"
-        Me.FacebookToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.FacebookToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FacebookToolStripMenuItem.Text = "Facebook"
         '
         'btnInput2
@@ -263,6 +253,7 @@ Partial Class Form1
         '
         'btnInput6
         '
+        Me.btnInput6.CausesValidation = False
         Me.btnInput6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInput6.Location = New System.Drawing.Point(157, 145)
         Me.btnInput6.Name = "btnInput6"
@@ -313,6 +304,7 @@ Partial Class Form1
         '
         'btnEqual
         '
+        Me.btnEqual.CausesValidation = False
         Me.btnEqual.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEqual.Location = New System.Drawing.Point(156, 317)
         Me.btnEqual.Name = "btnEqual"
@@ -384,7 +376,7 @@ Partial Class Form1
         'btnSin
         '
         Me.btnSin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSin.Location = New System.Drawing.Point(430, 87)
+        Me.btnSin.Location = New System.Drawing.Point(429, 145)
         Me.btnSin.Name = "btnSin"
         Me.btnSin.Size = New System.Drawing.Size(62, 52)
         Me.btnSin.TabIndex = 20
@@ -394,7 +386,7 @@ Partial Class Form1
         'btnCos
         '
         Me.btnCos.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCos.Location = New System.Drawing.Point(430, 145)
+        Me.btnCos.Location = New System.Drawing.Point(429, 203)
         Me.btnCos.Name = "btnCos"
         Me.btnCos.Size = New System.Drawing.Size(62, 52)
         Me.btnCos.TabIndex = 21
@@ -404,7 +396,7 @@ Partial Class Form1
         'btnTan
         '
         Me.btnTan.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTan.Location = New System.Drawing.Point(430, 203)
+        Me.btnTan.Location = New System.Drawing.Point(429, 261)
         Me.btnTan.Name = "btnTan"
         Me.btnTan.Size = New System.Drawing.Size(62, 52)
         Me.btnTan.TabIndex = 22
@@ -414,7 +406,7 @@ Partial Class Form1
         'btnHex
         '
         Me.btnHex.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHex.Location = New System.Drawing.Point(498, 261)
+        Me.btnHex.Location = New System.Drawing.Point(497, 317)
         Me.btnHex.Name = "btnHex"
         Me.btnHex.Size = New System.Drawing.Size(62, 52)
         Me.btnHex.TabIndex = 23
@@ -424,7 +416,7 @@ Partial Class Form1
         'btnln
         '
         Me.btnln.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnln.Location = New System.Drawing.Point(362, 87)
+        Me.btnln.Location = New System.Drawing.Point(362, 145)
         Me.btnln.Name = "btnln"
         Me.btnln.Size = New System.Drawing.Size(62, 52)
         Me.btnln.TabIndex = 24
@@ -434,7 +426,7 @@ Partial Class Form1
         'btnBin
         '
         Me.btnBin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBin.Location = New System.Drawing.Point(362, 145)
+        Me.btnBin.Location = New System.Drawing.Point(362, 203)
         Me.btnBin.Name = "btnBin"
         Me.btnBin.Size = New System.Drawing.Size(62, 52)
         Me.btnBin.TabIndex = 25
@@ -444,7 +436,7 @@ Partial Class Form1
         'btnLog
         '
         Me.btnLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLog.Location = New System.Drawing.Point(362, 203)
+        Me.btnLog.Location = New System.Drawing.Point(362, 261)
         Me.btnLog.Name = "btnLog"
         Me.btnLog.Size = New System.Drawing.Size(62, 52)
         Me.btnLog.TabIndex = 26
@@ -454,7 +446,7 @@ Partial Class Form1
         'btnExponetial
         '
         Me.btnExponetial.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExponetial.Location = New System.Drawing.Point(430, 261)
+        Me.btnExponetial.Location = New System.Drawing.Point(429, 317)
         Me.btnExponetial.Name = "btnExponetial"
         Me.btnExponetial.Size = New System.Drawing.Size(62, 52)
         Me.btnExponetial.TabIndex = 27
@@ -558,7 +550,7 @@ Partial Class Form1
         'btnLeftBracket
         '
         Me.btnLeftBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLeftBracket.Location = New System.Drawing.Point(294, 261)
+        Me.btnLeftBracket.Location = New System.Drawing.Point(293, 317)
         Me.btnLeftBracket.Name = "btnLeftBracket"
         Me.btnLeftBracket.Size = New System.Drawing.Size(62, 52)
         Me.btnLeftBracket.TabIndex = 32
@@ -568,7 +560,7 @@ Partial Class Form1
         'btnEuler
         '
         Me.btnEuler.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEuler.Location = New System.Drawing.Point(294, 203)
+        Me.btnEuler.Location = New System.Drawing.Point(293, 261)
         Me.btnEuler.Name = "btnEuler"
         Me.btnEuler.Size = New System.Drawing.Size(62, 52)
         Me.btnEuler.TabIndex = 31
@@ -588,7 +580,7 @@ Partial Class Form1
         'btnPi
         '
         Me.btnPi.Font = New System.Drawing.Font("Arial Narrow", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPi.Location = New System.Drawing.Point(294, 87)
+        Me.btnPi.Location = New System.Drawing.Point(293, 145)
         Me.btnPi.Name = "btnPi"
         Me.btnPi.Size = New System.Drawing.Size(62, 52)
         Me.btnPi.TabIndex = 29
@@ -598,7 +590,7 @@ Partial Class Form1
         'btnRightBracket
         '
         Me.btnRightBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRightBracket.Location = New System.Drawing.Point(362, 261)
+        Me.btnRightBracket.Location = New System.Drawing.Point(362, 317)
         Me.btnRightBracket.Name = "btnRightBracket"
         Me.btnRightBracket.Size = New System.Drawing.Size(62, 52)
         Me.btnRightBracket.TabIndex = 36
@@ -608,7 +600,7 @@ Partial Class Form1
         'btnTanh
         '
         Me.btnTanh.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTanh.Location = New System.Drawing.Point(498, 203)
+        Me.btnTanh.Location = New System.Drawing.Point(497, 261)
         Me.btnTanh.Name = "btnTanh"
         Me.btnTanh.Size = New System.Drawing.Size(62, 52)
         Me.btnTanh.TabIndex = 35
@@ -618,7 +610,7 @@ Partial Class Form1
         'btnCosh
         '
         Me.btnCosh.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCosh.Location = New System.Drawing.Point(498, 145)
+        Me.btnCosh.Location = New System.Drawing.Point(497, 203)
         Me.btnCosh.Name = "btnCosh"
         Me.btnCosh.Size = New System.Drawing.Size(62, 52)
         Me.btnCosh.TabIndex = 34
@@ -628,7 +620,7 @@ Partial Class Form1
         'btnSinh
         '
         Me.btnSinh.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSinh.Location = New System.Drawing.Point(498, 87)
+        Me.btnSinh.Location = New System.Drawing.Point(497, 145)
         Me.btnSinh.Name = "btnSinh"
         Me.btnSinh.Size = New System.Drawing.Size(62, 52)
         Me.btnSinh.TabIndex = 33
@@ -648,12 +640,49 @@ Partial Class Form1
         'btnSquareRoot
         '
         Me.btnSquareRoot.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSquareRoot.Location = New System.Drawing.Point(294, 145)
+        Me.btnSquareRoot.Location = New System.Drawing.Point(293, 203)
         Me.btnSquareRoot.Name = "btnSquareRoot"
         Me.btnSquareRoot.Size = New System.Drawing.Size(62, 52)
         Me.btnSquareRoot.TabIndex = 38
         Me.btnSquareRoot.Text = "√'"
         Me.btnSquareRoot.UseVisualStyleBackColor = True
+        '
+        'txtAnswer
+        '
+        Me.txtAnswer.AllowDrop = True
+        Me.txtAnswer.BackColor = System.Drawing.Color.White
+        Me.txtAnswer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.txtAnswer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAnswer.Location = New System.Drawing.Point(21, 25)
+        Me.txtAnswer.Name = "txtAnswer"
+        Me.txtAnswer.Size = New System.Drawing.Size(334, 57)
+        Me.txtAnswer.TabIndex = 0
+        Me.txtAnswer.Text = "0"
+        Me.txtAnswer.TextAlign = System.Drawing.ContentAlignment.BottomRight
+        '
+        'AnswerHistoryToolStripMenuItem
+        '
+        Me.AnswerHistoryToolStripMenuItem.Name = "AnswerHistoryToolStripMenuItem"
+        Me.AnswerHistoryToolStripMenuItem.Size = New System.Drawing.Size(99, 20)
+        Me.AnswerHistoryToolStripMenuItem.Text = "Answer History"
+        '
+        'lstAnswer
+        '
+        Me.lstAnswer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstAnswer.Location = New System.Drawing.Point(362, 25)
+        Me.lstAnswer.Name = "lstAnswer"
+        Me.lstAnswer.Size = New System.Drawing.Size(197, 114)
+        Me.lstAnswer.TabIndex = 40
+        '
+        'btnClearAnswerHistory
+        '
+        Me.btnClearAnswerHistory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClearAnswerHistory.Location = New System.Drawing.Point(293, 87)
+        Me.btnClearAnswerHistory.Name = "btnClearAnswerHistory"
+        Me.btnClearAnswerHistory.Size = New System.Drawing.Size(62, 52)
+        Me.btnClearAnswerHistory.TabIndex = 41
+        Me.btnClearAnswerHistory.Text = "Clear History"
+        Me.btnClearAnswerHistory.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -661,6 +690,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(830, 372)
+        Me.Controls.Add(Me.btnClearAnswerHistory)
+        Me.Controls.Add(Me.lstAnswer)
         Me.Controls.Add(Me.btnSquareRoot)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnRightBracket)
@@ -701,6 +732,7 @@ Partial Class Form1
         Me.Controls.Add(Me.lblTop)
         Me.Controls.Add(Me.txtAnswer)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximumSize = New System.Drawing.Size(846, 411)
         Me.Name = "Form1"
@@ -713,8 +745,6 @@ Partial Class Form1
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtAnswer As Label
     Friend WithEvents btnInput1 As Button
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
@@ -776,4 +806,8 @@ Partial Class Form1
     Friend WithEvents YoutubeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LinkedinToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FacebookToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents txtAnswer As Label
+    Friend WithEvents AnswerHistoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lstAnswer As TreeView
+    Friend WithEvents btnClearAnswerHistory As Button
 End Class
