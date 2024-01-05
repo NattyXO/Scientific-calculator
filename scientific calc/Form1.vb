@@ -585,7 +585,7 @@ Version 1.0.3(Official Build)")
     End Sub
 
     Private Sub KeyboardShortcutReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyboardShortcutReferenceToolStripMenuItem.Click
-        MessageBox.Show("Failed to open URL: ")
+        MessageBox.Show("You Can type from the keyboard, like 0–9 and % * / + - ( )" & Environment.NewLine & "Also, you can use the Enter key to perform a calculation.")
     End Sub
 
 
