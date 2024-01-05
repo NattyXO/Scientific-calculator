@@ -13,7 +13,7 @@ A scientific calculator program capable of performing basic arithmetic operation
 
 ## Installation
 
-Go to the [Release] (https://github.com/NattyXO/Scientific-calculator/releases) section, where you can find the executable file, and run the application.
+Go to the [Release](https://github.com/NattyXO/Scientific-calculator/releases) section, where you can find the executable file, and run the application.
 
 ## Usage
 
