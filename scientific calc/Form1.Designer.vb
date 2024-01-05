@@ -31,6 +31,17 @@ Partial Class Form1
         Me.ScientificToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnitConversionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KeyboardShortcutReferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GithubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RealseNotesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutScientificCalculatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SendFeedbackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportAProblemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SuggestAFeatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JoinUsOnSocialMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.YoutubeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LinkedinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FacebookToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnInput2 = New System.Windows.Forms.Button()
         Me.btnInput3 = New System.Windows.Forms.Button()
         Me.btnInput4 = New System.Windows.Forms.Button()
@@ -84,9 +95,9 @@ Partial Class Form1
         Me.txtAnswer.BackColor = System.Drawing.Color.White
         Me.txtAnswer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.txtAnswer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAnswer.Location = New System.Drawing.Point(20, 25)
+        Me.txtAnswer.Location = New System.Drawing.Point(21, 25)
         Me.txtAnswer.Name = "txtAnswer"
-        Me.txtAnswer.Size = New System.Drawing.Size(267, 57)
+        Me.txtAnswer.Size = New System.Drawing.Size(266, 57)
         Me.txtAnswer.TabIndex = 0
         Me.txtAnswer.Text = "0"
         Me.txtAnswer.TextAlign = System.Drawing.ContentAlignment.BottomRight
@@ -120,26 +131,95 @@ Partial Class Form1
         'StandardToolStripMenuItem
         '
         Me.StandardToolStripMenuItem.Name = "StandardToolStripMenuItem"
-        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.StandardToolStripMenuItem.Text = "Standard"
         '
         'ScientificToolStripMenuItem
         '
         Me.ScientificToolStripMenuItem.Name = "ScientificToolStripMenuItem"
-        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.ScientificToolStripMenuItem.Text = "Scientific"
         '
         'UnitConversionToolStripMenuItem
         '
         Me.UnitConversionToolStripMenuItem.Name = "UnitConversionToolStripMenuItem"
-        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.UnitConversionToolStripMenuItem.Text = "Unit Conversion"
         '
         'AboutToolStripMenuItem
         '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyboardShortcutReferenceToolStripMenuItem, Me.GithubToolStripMenuItem, Me.RealseNotesToolStripMenuItem, Me.AboutScientificCalculatorToolStripMenuItem, Me.SendFeedbackToolStripMenuItem, Me.JoinUsOnSocialMediaToolStripMenuItem})
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
         Me.AboutToolStripMenuItem.Text = "About Us"
+        '
+        'KeyboardShortcutReferenceToolStripMenuItem
+        '
+        Me.KeyboardShortcutReferenceToolStripMenuItem.Name = "KeyboardShortcutReferenceToolStripMenuItem"
+        Me.KeyboardShortcutReferenceToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.KeyboardShortcutReferenceToolStripMenuItem.Text = "Keyboard Shortcut Reference"
+        '
+        'GithubToolStripMenuItem
+        '
+        Me.GithubToolStripMenuItem.Name = "GithubToolStripMenuItem"
+        Me.GithubToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.GithubToolStripMenuItem.Text = "Github"
+        '
+        'RealseNotesToolStripMenuItem
+        '
+        Me.RealseNotesToolStripMenuItem.Name = "RealseNotesToolStripMenuItem"
+        Me.RealseNotesToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.RealseNotesToolStripMenuItem.Text = "Realse Notes"
+        '
+        'AboutScientificCalculatorToolStripMenuItem
+        '
+        Me.AboutScientificCalculatorToolStripMenuItem.Name = "AboutScientificCalculatorToolStripMenuItem"
+        Me.AboutScientificCalculatorToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.AboutScientificCalculatorToolStripMenuItem.Text = "About Scientific Calculator"
+        '
+        'SendFeedbackToolStripMenuItem
+        '
+        Me.SendFeedbackToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportAProblemToolStripMenuItem, Me.SuggestAFeatureToolStripMenuItem})
+        Me.SendFeedbackToolStripMenuItem.Name = "SendFeedbackToolStripMenuItem"
+        Me.SendFeedbackToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.SendFeedbackToolStripMenuItem.Text = "Send Feedback"
+        '
+        'ReportAProblemToolStripMenuItem
+        '
+        Me.ReportAProblemToolStripMenuItem.Name = "ReportAProblemToolStripMenuItem"
+        Me.ReportAProblemToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ReportAProblemToolStripMenuItem.Text = "Report a Problem..."
+        '
+        'SuggestAFeatureToolStripMenuItem
+        '
+        Me.SuggestAFeatureToolStripMenuItem.Name = "SuggestAFeatureToolStripMenuItem"
+        Me.SuggestAFeatureToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.SuggestAFeatureToolStripMenuItem.Text = "Suggest a Feature"
+        '
+        'JoinUsOnSocialMediaToolStripMenuItem
+        '
+        Me.JoinUsOnSocialMediaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YoutubeToolStripMenuItem, Me.LinkedinToolStripMenuItem, Me.FacebookToolStripMenuItem})
+        Me.JoinUsOnSocialMediaToolStripMenuItem.Name = "JoinUsOnSocialMediaToolStripMenuItem"
+        Me.JoinUsOnSocialMediaToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.JoinUsOnSocialMediaToolStripMenuItem.Text = "Join Us on Social Media"
+        '
+        'YoutubeToolStripMenuItem
+        '
+        Me.YoutubeToolStripMenuItem.Name = "YoutubeToolStripMenuItem"
+        Me.YoutubeToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.YoutubeToolStripMenuItem.Text = "Youtube"
+        '
+        'LinkedinToolStripMenuItem
+        '
+        Me.LinkedinToolStripMenuItem.Name = "LinkedinToolStripMenuItem"
+        Me.LinkedinToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.LinkedinToolStripMenuItem.Text = "Linkedin"
+        '
+        'FacebookToolStripMenuItem
+        '
+        Me.FacebookToolStripMenuItem.Name = "FacebookToolStripMenuItem"
+        Me.FacebookToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.FacebookToolStripMenuItem.Text = "Facebook"
         '
         'btnInput2
         '
@@ -244,7 +324,7 @@ Partial Class Form1
         'btnDot
         '
         Me.btnDot.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDot.Location = New System.Drawing.Point(21, 257)
+        Me.btnDot.Location = New System.Drawing.Point(21, 261)
         Me.btnDot.Name = "btnDot"
         Me.btnDot.Size = New System.Drawing.Size(62, 52)
         Me.btnDot.TabIndex = 14
@@ -254,7 +334,7 @@ Partial Class Form1
         'btnClear
         '
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClear.Location = New System.Drawing.Point(21, 315)
+        Me.btnClear.Location = New System.Drawing.Point(21, 317)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(62, 52)
         Me.btnClear.TabIndex = 15
@@ -264,7 +344,7 @@ Partial Class Form1
         'btnInput0
         '
         Me.btnInput0.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInput0.Location = New System.Drawing.Point(88, 259)
+        Me.btnInput0.Location = New System.Drawing.Point(88, 261)
         Me.btnInput0.Name = "btnInput0"
         Me.btnInput0.Size = New System.Drawing.Size(62, 52)
         Me.btnInput0.TabIndex = 16
@@ -685,4 +765,15 @@ Partial Class Form1
     Friend WithEvents btnSinh As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents btnSquareRoot As Button
+    Friend WithEvents AboutScientificCalculatorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GithubToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RealseNotesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents KeyboardShortcutReferenceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SendFeedbackToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReportAProblemToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SuggestAFeatureToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents JoinUsOnSocialMediaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents YoutubeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LinkedinToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FacebookToolStripMenuItem As ToolStripMenuItem
 End Class

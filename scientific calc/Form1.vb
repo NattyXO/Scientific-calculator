@@ -14,7 +14,7 @@
         Me.Height = 411
         Me.Width = 587
         btnEqual.Width = 200
-        txtAnswer.Width = 404
+        txtAnswer.Width = 403
     End Sub
 
     Private Sub UnitConversionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnitConversionToolStripMenuItem.Click
@@ -22,7 +22,7 @@
         Me.Height = 411
         Me.Width = 846
         btnEqual.Width = 200
-        txtAnswer.Width = 404
+        txtAnswer.Width = 403
     End Sub
 
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -42,7 +42,7 @@
         Me.Height = 411
         Me.Width = 310
         btnEqual.Width = 131
-        txtAnswer.Width = 267
+        txtAnswer.Width = 266
 
         ComboBox1.Text = "Choose one..."
         ComboBox1.Items.Add("Celsius to Fahrenheit")
@@ -52,16 +52,6 @@
         ComboBox1.Items.Add("Centimetre to Metres")
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        ' About
-        MsgBox("Hi I Am NattyXO.This Is My First Scientific Calculator.
-              
-Ahadu Tech Studio® 
-Scientific Calculator
-Github: NattyXO
-© 2019 Ahadu Inc. All rights reserved.
-Version 1.0.2(Official Build)")
-    End Sub
 
     Private Sub btnHex_Click(sender As Object, e As EventArgs) Handles btnHex.Click
         If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
@@ -494,6 +484,116 @@ Version 1.0.2(Official Build)")
                 txtAnswer.Text &= "."
             End If
             dotUsed = True
+        End If
+    End Sub
+
+    Private Sub AboutScientificCalculatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutScientificCalculatorToolStripMenuItem.Click
+        ' About
+        MsgBox("Hi I Am NattyXO.This Is My First Scientific Calculator.
+              
+Ahadu Tech Studio® 
+Scientific Calculator
+Github: NattyXO
+© 2019 Ahadu Inc. All rights reserved.
+Version 1.0.3(Official Build)")
+    End Sub
+
+    Private Sub GithubToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GithubToolStripMenuItem.Click
+        Dim url As String = "https://github.com/NattyXO/Scientific-calculator"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub RealseNotesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RealseNotesToolStripMenuItem.Click
+
+        Dim url As String = "https://github.com/NattyXO/Scientific-calculator/releases"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub YoutubeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YoutubeToolStripMenuItem.Click
+        Dim url As String = "https://www.youtube.com/c/AhaduTech"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LinkedinToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LinkedinToolStripMenuItem.Click
+
+        Dim url As String = "https://www.linkedin.com/in/natnael-bizuneh-zenebe/"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub FacebookToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacebookToolStripMenuItem.Click
+        Dim url As String = "https://www.facebook.com/ahadutechoffical"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub ReportAProblemToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportAProblemToolStripMenuItem.Click
+        Dim url As String = "https://forms.gle/MzTRF89iFr6dckJYA"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub SuggestAFeatureToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SuggestAFeatureToolStripMenuItem.Click
+        Dim url As String = "https://forms.gle/MzTRF89iFr6dckJYA"
+
+        ' Open the URL in the default browser
+        Try
+            Process.Start(url)
+        Catch ex As Exception
+            ' Handle any potential exceptions if the URL cannot be opened
+            MessageBox.Show("Failed to open URL: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub KeyboardShortcutReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyboardShortcutReferenceToolStripMenuItem.Click
+        MessageBox.Show("Failed to open URL: ")
+    End Sub
+
+
+    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        ' Check if the Enter key is pressed
+        If e.KeyCode = Keys.Enter Then
+            ' Call the logic you want to perform when Enter is pressed (similar to btnEqual click)
+            btnEqual.PerformClick()
         End If
     End Sub
 End Class
