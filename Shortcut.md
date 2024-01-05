@@ -1,0 +1,20 @@
+# Keyboard shortcuts in Scientific Calculator
+
+- **Numbers (0-9):** Press the corresponding number keys (either the regular numbers or the NumPad numbers) to input the numbers into the calculator.
+- **Arithmetic Operators:**
+  - **Addition (+):** Use the '+' key.
+  - **Subtraction (-):** Use the '-' key.
+  - **Multiplication (*):** Use the '*' key.
+  - **Division (/):** Use the '/' key.
+  - **Modulus (%):** Use the '%' key.
+- **Other Operators and Functions:**
+  - **Dot (.)**: Use the '.' key for decimal points.
+  - **Clear (C):** Press the 'C' key to clear the calculator.
+  - **Backspace:** Use the 'Backspace' key to delete the last entered character.
+  - **Pi (P):** Press 'P' to insert the value of Pi (π).
+  - **Euler (E):** Press 'E' to insert the value of Euler's number (e).
+  - **Parentheses:** Use Shift + '9' for '(', Shift + '0' for ')'.
+- **Advanced Operators:**
+  - **Shift + '/':** Use this combination to insert the '/' character.
+  - **Shift + '%':** Use this combination to insert the '%' character.
+  - **Shift + '*':** Use this combination to insert the '*' character.
