@@ -1,4 +1,5 @@
-﻿Public Class Form1
+﻿Imports System.Text
+Public Class Form1
 
     Dim firstInteger As Double
     Dim secondInteger As Double
@@ -426,6 +427,8 @@
             End If
 
             Long.TryParse(TextBox1.Text, inputValue)
+            Dim binaryInput As String = TextBox1.Text
+            Dim decimaltobinaryinput As String = TextBox1.Text
 
             Dim result As Double
             Select Case ComboBox1.SelectedItem.ToString()
@@ -446,13 +449,13 @@
                     result = inputValue / 100
                     Unitshow.Text = $"{result} Metres"
                 Case "ASCII Character to Hexadecimal"
-                    result = Convert.ToString(Asc(inputValue), 16)
+                    result = Convert.ToString(Asc(binaryInput), 16)
                     Unitshow.Text = $"{result}"
                 Case "ASCII Character to Decimal"
-                    result = Asc(inputValue)
+                    result = Asc(binaryInput)
                     Unitshow.Text = $"{result}"
                 Case "ASCII Character to Binary"
-                    result = Convert.ToString(Asc(inputValue), 2)
+                    result = Convert.ToString(Asc(binaryInput), 2)
                     Unitshow.Text = $"{result}"
                 Case "Decimal to Hexadecimal"
                     Dim decimalValue As Long = inputValue
@@ -468,30 +471,19 @@
                         MessageBox.Show("Invalid input. Please enter a valid number within the range of 0 to 65535.")
                     End If
                 Case "Decimal to Binary"
-                    Try
-                        Dim success As Boolean = Double.TryParse(TextBox1.Text, inputValue)
-                        If success Then
-                            Dim decimalValue As Long = CLng(inputValue)
-                            Dim binaryValue As String = Convert.ToString(decimalValue, 2)
-                            Unitshow.Text = $"{binaryValue}"
-                        Else
-                            MessageBox.Show("Invalid input. Please enter a valid number.")
-                        End If
-                    Catch ex As OverflowException
-                        MessageBox.Show("Input value is too large to convert to a decimal.")
-                    End Try
-
-                Case "Binary to Hexadecimal"
-                    Dim binaryValue As String = inputValue
-
-                    If IsBinary(binaryValue) Then
-                        Dim hexValue As String = Convert.ToInt64(binaryValue, 2).ToString("X")
-                        Unitshow.Text = $"{hexValue}"
+                    Dim parsedValue As Long
+                    If Long.TryParse(decimaltobinaryinput, parsedValue) Then
+                        Dim binaryValue As String = DecimalToBinary(decimaltobinaryinput) ' Use the parsed value
+                        Unitshow.Text = binaryValue ' Display the binary value
                     Else
-                        MessageBox.Show("Invalid binary input. Please enter a valid binary number.")
+                        MessageBox.Show("Invalid decimal input. Please enter a valid decimal number.")
                     End If
+                Case "Binary to Hexadecimal"
+                    Dim binaryValue As String = binaryInput
+                    Dim hexValue As String = Convert.ToInt64(binaryValue, 2).ToString("X")
+                    Unitshow.Text = $"{hexValue}"
                 Case "Binary to ASCII Character"
-                    Dim binaryValue As String = inputValue
+                    Dim binaryValue As String = binaryInput
                     Dim decimalValue As Long = Convert.ToUInt64(binaryValue, 2)
 
                     If decimalValue >= 0 AndAlso decimalValue <= 65535 Then
@@ -501,9 +493,9 @@
                         MessageBox.Show("The converted value is out of range for character representation.")
                     End If
                 Case "Binary to Decimal"
-                    Dim binaryValue As String = inputValue
-                    Dim decimalValue As Integer = BinaryToDec(binaryValue)
-                    Unitshow.Text = $"{decimalValue}"
+                    Dim binaryNumber As String = binaryInput
+                    Dim decimalResult As Long = BinaryToDecimal(binaryNumber)
+                    Unitshow.Text = $"{decimalResult}"
                 Case Else
                     MsgBox("Select a valid Unit of Conversion", vbInformation, "Info")
             End Select
@@ -513,31 +505,34 @@
         End If
     End Sub
 
-    Private Function BinaryToDec(input As String) As Integer
-        Dim array As Char() = input.ToCharArray()
-        array.Reverse(array)
-        Dim sum As Integer = 0
+    Function DecimalToBinary(decimalNumber As Long) As String
+        Dim binaryString As String = ""
 
-        For i As Integer = 0 To array.Length - 1
-            If array(i) = "1" Then
-                If i = 0 Then
-                    sum += 1
-                Else
-                    sum += CInt(Math.Pow(2, i))
-                End If
+        Do While decimalNumber > 0
+            binaryString = decimalNumber Mod 2 & binaryString ' Append remainder to the left
+            decimalNumber = decimalNumber \ 2  ' Integer division to get the next quotient
+        Loop
+
+        Return binaryString
+    End Function
+    Function BinaryToDecimal(binaryString As String) As Long
+        Dim decimalValue As Long = 0
+        Dim powerOfTwo As Long = 1
+
+        For i As Integer = binaryString.Length - 1 To 0 Step -1 ' Iterate from right to left
+            Dim digit As Integer = Val(binaryString(i))
+
+            If digit <> 0 And digit <> 1 Then
+                Throw New ArgumentException("Invalid binary digit: " & digit)
             End If
+
+            decimalValue += digit * powerOfTwo
+            powerOfTwo *= 2
         Next
 
-        Return sum
+        Return decimalValue
     End Function
-    Private Function IsBinary(input As String) As Boolean
-        For Each c As Char In input
-            If c <> "0"c AndAlso c <> "1"c Then
-                Return False
-            End If
-        Next
-        Return True
-    End Function
+
 
     Private Sub btnBin_Click(sender As Object, e As EventArgs) Handles btnBin.Click
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
@@ -1118,62 +1113,62 @@ Version 1.0.3(Official Build)")
             ' Copy the selected node's text to the clipboard
             Clipboard.SetText(lstAnswer.SelectedNode.Text)
 
-            ElseIf e.KeyCode = Keys.Back Then ' "back" key
-                btnBack.PerformClick()
-            ElseIf e.KeyCode = Keys.C Then ' "clear" key
-                btnClear.PerformClick()
-            ElseIf e.KeyCode = Keys.E Then ' "Euler" key
-                btnEuler.PerformClick()
-            ElseIf e.KeyCode = Keys.P Then ' "P" key
-                btnPi.PerformClick()
-            ElseIf e.KeyCode = Keys.OemQuestion AndAlso e.Shift Then
-                ' This handles the "/" character using Shift + ?
-                btnDivision.PerformClick() ' Triggers the left parenthesis button click
-            ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
-                ' This handles the "%" character using Shift + 9
-                btnModules.PerformClick()
-            ElseIf e.KeyCode = Keys.D9 AndAlso e.Shift Then
-                ' This handles the "(" character using Shift + 9
-                btnLeftBracket.PerformClick() ' Triggers the left parenthesis button click
-            ElseIf e.KeyCode = Keys.D0 AndAlso e.Shift Then
-                ' This handles the ")" character using Shift + 0
-                btnRightBracket.PerformClick() ' Triggers the right parenthesis button click
-                ' Check for the percent sign using its ASCII code (37)
-            ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
-                btnModules.PerformClick() ' Triggers the percent button click
-            ElseIf e.KeyCode = Keys.D8 AndAlso e.Shift Then
-                ' This handles the "*" character using Shift + 9
-                btnMultiplication.PerformClick()
-            ElseIf e.KeyCode = Keys.D0 Then
-                ' This handles the "0" character
-                btnInput0.PerformClick()
-            ElseIf e.KeyCode = Keys.D1 Then
-                ' This handles the "1" character
-                btnInput1.PerformClick()
-            ElseIf e.KeyCode = Keys.D2 Then
-                ' This handles the "2" character
-                btnInput2.PerformClick()
-            ElseIf e.KeyCode = Keys.D3 Then
-                ' This handles the "3" character
-                btnInput3.PerformClick()
-            ElseIf e.KeyCode = Keys.D4 Then
-                ' This handles the "4" character
-                btnInput4.PerformClick()
-            ElseIf e.KeyCode = Keys.D5 Then
-                ' This handles the "5" character
-                btnInput5.PerformClick()
-            ElseIf e.KeyCode = Keys.D6 Then
-                ' This handles the "6" character
-                btnInput6.PerformClick()
-            ElseIf e.KeyCode = Keys.D7 Then
-                ' This handles the "7" character
-                btnInput7.PerformClick()
-            ElseIf e.KeyCode = Keys.D8 Then
-                ' This handles the "8" character
-                btnInput8.PerformClick()
-            ElseIf e.KeyCode = Keys.D9 Then
-                ' This handles the "9" character
-                btnInput9.PerformClick()
+        ElseIf e.KeyCode = Keys.Back Then ' "back" key
+            btnBack.PerformClick()
+        ElseIf e.KeyCode = Keys.C Then ' "clear" key
+            btnClear.PerformClick()
+        ElseIf e.KeyCode = Keys.E Then ' "Euler" key
+            btnEuler.PerformClick()
+        ElseIf e.KeyCode = Keys.P Then ' "P" key
+            btnPi.PerformClick()
+        ElseIf e.KeyCode = Keys.OemQuestion AndAlso e.Shift Then
+            ' This handles the "/" character using Shift + ?
+            btnDivision.PerformClick() ' Triggers the left parenthesis button click
+        ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
+            ' This handles the "%" character using Shift + 9
+            btnModules.PerformClick()
+        ElseIf e.KeyCode = Keys.D9 AndAlso e.Shift Then
+            ' This handles the "(" character using Shift + 9
+            btnLeftBracket.PerformClick() ' Triggers the left parenthesis button click
+        ElseIf e.KeyCode = Keys.D0 AndAlso e.Shift Then
+            ' This handles the ")" character using Shift + 0
+            btnRightBracket.PerformClick() ' Triggers the right parenthesis button click
+            ' Check for the percent sign using its ASCII code (37)
+        ElseIf e.KeyCode = Keys.D5 AndAlso e.Shift Then
+            btnModules.PerformClick() ' Triggers the percent button click
+        ElseIf e.KeyCode = Keys.D8 AndAlso e.Shift Then
+            ' This handles the "*" character using Shift + 9
+            btnMultiplication.PerformClick()
+        ElseIf e.KeyCode = Keys.D0 Then
+            ' This handles the "0" character
+            btnInput0.PerformClick()
+        ElseIf e.KeyCode = Keys.D1 Then
+            ' This handles the "1" character
+            btnInput1.PerformClick()
+        ElseIf e.KeyCode = Keys.D2 Then
+            ' This handles the "2" character
+            btnInput2.PerformClick()
+        ElseIf e.KeyCode = Keys.D3 Then
+            ' This handles the "3" character
+            btnInput3.PerformClick()
+        ElseIf e.KeyCode = Keys.D4 Then
+            ' This handles the "4" character
+            btnInput4.PerformClick()
+        ElseIf e.KeyCode = Keys.D5 Then
+            ' This handles the "5" character
+            btnInput5.PerformClick()
+        ElseIf e.KeyCode = Keys.D6 Then
+            ' This handles the "6" character
+            btnInput6.PerformClick()
+        ElseIf e.KeyCode = Keys.D7 Then
+            ' This handles the "7" character
+            btnInput7.PerformClick()
+        ElseIf e.KeyCode = Keys.D8 Then
+            ' This handles the "8" character
+            btnInput8.PerformClick()
+        ElseIf e.KeyCode = Keys.D9 Then
+            ' This handles the "9" character
+            btnInput9.PerformClick()
 
         End If
     End Sub
