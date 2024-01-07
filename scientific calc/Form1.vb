@@ -12,14 +12,14 @@
     Private Sub ScientificToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScientificToolStripMenuItem.Click
         'Code for extend form
         Me.Height = 411
-        Me.Width = 587
+        Me.Width = 579
         txtAnswer.Width = 334
     End Sub
 
     Private Sub UnitConversionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnitConversionToolStripMenuItem.Click
         'Code for extend form
         Me.Height = 411
-        Me.Width = 846
+        Me.Width = 854
         txtAnswer.Width = 334
     End Sub
 
@@ -35,6 +35,7 @@
         Me.Width = 310
         txtAnswer.Width = 267
     End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True ' Enable key events for the form
 
@@ -49,124 +50,354 @@
         ComboBox1.Items.Add("Miles to Kilometres")
         ComboBox1.Items.Add("Kilometres to Miles")
         ComboBox1.Items.Add("Centimetre to Metres")
+        ComboBox1.Items.Add("ASCII Character to Hexadecimal")
+        ComboBox1.Items.Add("ASCII Character to Decimal")
+        ComboBox1.Items.Add("ASCII Character to Binary")
+        ComboBox1.Items.Add("Decimal to Hexadecimal")
+        ComboBox1.Items.Add("Decimal to ASCII Character")
+        ComboBox1.Items.Add("Decimal to Binary")
+        ComboBox1.Items.Add("Binary to Hexadecimal")
+        ComboBox1.Items.Add("Binary to ASCII Character")
+        ComboBox1.Items.Add("Binary to Decimal")
+
     End Sub
+    Private Function DecimalToHexadecimal(input As Decimal) As String
+        Dim isNegative As Boolean = False
+
+        ' Check if the input is negative
+        If input < 0 Then
+            isNegative = True
+            input = Decimal.Negate(input)
+        End If
+
+        If Decimal.Remainder(input, 1) = 0 Then
+            ' Integer input, process only the whole number part
+            Dim wholePart As Long = Decimal.ToInt64(input)
+            Dim hexWhole As String = ""
+
+            While wholePart > 0
+                Dim remainder As Long = wholePart Mod 16
+                If remainder < 10 Then
+                    hexWhole = remainder.ToString() & hexWhole
+                Else
+                    hexWhole = ChrW(55 + remainder) & hexWhole
+                End If
+                wholePart \= 16
+            End While
+
+            ' Add negative sign if needed
+            If isNegative Then
+                hexWhole = "-" & hexWhole
+            End If
+
+            Return hexWhole
+        Else
+            ' Fractional input, process both whole and fractional parts
+            Dim wholePart As Long = Decimal.ToInt64(input)
+            Dim fractionalPart As Decimal = input - wholePart
+
+            Dim hexWhole As String = ""
+            While wholePart > 0
+                Dim remainder As Long = wholePart Mod 16
+                If remainder < 10 Then
+                    hexWhole = remainder.ToString() & hexWhole
+                Else
+                    hexWhole = ChrW(55 + remainder) & hexWhole
+                End If
+                wholePart \= 16
+            End While
+
+            Dim hexFractional As String = ""
+            For i As Integer = 0 To 21 ' Considering 18 digits after the decimal point
+                fractionalPart *= 16
+                Dim digit As Long = Decimal.ToInt64(fractionalPart)
+                If digit < 10 Then
+                    hexFractional &= digit.ToString()
+                Else
+                    hexFractional &= ChrW(55 + digit)
+                End If
+                fractionalPart -= Decimal.Truncate(fractionalPart)
+            Next
+
+            ' Add negative sign if needed
+            If isNegative Then
+                hexWhole = "-" & hexWhole
+            End If
+
+            Return hexWhole & "." & hexFractional
+        End If
+    End Function
+
 
 
     Private Sub btnHex_Click(sender As Object, e As EventArgs) Handles btnHex.Click
-        If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            Dim input As Double
-            If Double.TryParse(txtAnswer.Text, input) Then
-                Try
-                    ' Convert the input to its hexadecimal representation
-                    Dim hexValue As String = Convert.ToString(Convert.ToInt64(input), 16)
-                    txtAnswer.Text = hexValue
-                Catch ex As OverflowException
-                    MessageBox.Show("The number is too large or too small for conversion to hexadecimal.")
-                End Try
-            Else
-                MessageBox.Show("Invalid input for hexadecimal conversion.")
-            End If
-        Else
-            MessageBox.Show("Please provide a valid input before converting to hexadecimal.")
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
         End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert to hexadecimal.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for hexadecimal conversion.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim hexValue As String = DecimalToHexadecimal(input)
+            lblTop.Text = hexValue.ToString()
+            newNode = New TreeNode(hexValue.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large for conversion to hexadecimal.")
+        End Try
     End Sub
 
 
 
     Private Sub btnLog_Click(sender As Object, e As EventArgs) Handles btnLog.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Invalid input for Log operation.")
+            MessageBox.Show("Please enter a valid number to calculate Logarithm base 10.")
             Return
         End If
 
         Dim input As Double
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Log operation.")
-            Return
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Log operation
-        Dim result As Double = Math.Log10(input)
-        txtAnswer.Text = result.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Log10(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for Logarithm 10 base operation.")
+            Return
+        End If
     End Sub
 
+
     Private Sub btnCosh_Click(sender As Object, e As EventArgs) Handles btnCosh.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate hyperbolic cosine.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Cosh(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Cosh(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for hyperbolic cosine operation.")
+            Return
+        End If
     End Sub
 
     Private Sub btnSinh_Click(sender As Object, e As EventArgs) Handles btnSinh.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate hyperbolic sine.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Sinh(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Sinh(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for hyperbolic sine operation.")
+            Return
+        End If
     End Sub
 
     Private Sub btnTanh_Click(sender As Object, e As EventArgs) Handles btnTanh.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate hyperbolic tangent.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Tanh(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Tanh(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for hyperbolic tangent operation.")
+            Return
+        End If
     End Sub
     Private Sub btnln_Click(sender As Object, e As EventArgs) Handles btnln.Click
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Invalid input for Ln operation.")
-            Return
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
         End If
 
         Dim input As Double
+        Dim isvalidnumber As Boolean = False
+        Dim newNode As TreeNode
 
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Ln operation.")
-            Return
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a hexadecimal string
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                isvalidnumber = True
+                ' Remove the "0x" prefix if present
+                lblTop.Text = lblTop.Text.Substring(2)
+            End If
         End If
 
-        ' Perform the Ln operation
-        Dim result As Double = Math.Log(input)
-        txtAnswer.Text = result.ToString()
-        lblTop.Text = ""
+        If isvalidnumber Then
+            ' Perform the logarithm operation on the hexadecimal value
+            If Not Double.TryParse(lblTop.Text, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                MessageBox.Show("Invalid input for Logarithm operation.")
+                Return
+            End If
+
+            ' Calculate the logarithm
+            answer = Math.Log(input)
+        Else
+            ' Perform the logarithm operation on the decimal value
+            If Not Double.TryParse(lblTop.Text, input) Then
+                MessageBox.Show("Invalid input for Logarithm operation.")
+                Return
+            End If
+
+            ' Calculate the logarithm
+            answer = Math.Log(input)
+        End If
+
+        lblTop.Text = answer.ToString()
+        newNode = New TreeNode(answer.ToString())
+        lstAnswer.Nodes.Add(newNode)
+
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -188,11 +419,13 @@
         End If
 
         If ComboBox1.SelectedItem IsNot Nothing Then
-            Dim inputValue As Double
-            If Not Double.TryParse(TextBox1.Text, inputValue) Then
+            Dim inputValue As Long
+            If String.IsNullOrWhiteSpace(TextBox1.Text) Then
                 MsgBox("Please enter a valid number for conversion.", vbInformation, "Info")
                 Return
             End If
+
+            Long.TryParse(TextBox1.Text, inputValue)
 
             Dim result As Double
             Select Case ComboBox1.SelectedItem.ToString()
@@ -212,6 +445,65 @@
                 Case "Centimetre to Metres"
                     result = inputValue / 100
                     Unitshow.Text = $"{result} Metres"
+                Case "ASCII Character to Hexadecimal"
+                    result = Convert.ToString(Asc(inputValue), 16)
+                    Unitshow.Text = $"{result}"
+                Case "ASCII Character to Decimal"
+                    result = Asc(inputValue)
+                    Unitshow.Text = $"{result}"
+                Case "ASCII Character to Binary"
+                    result = Convert.ToString(Asc(inputValue), 2)
+                    Unitshow.Text = $"{result}"
+                Case "Decimal to Hexadecimal"
+                    Dim decimalValue As Long = inputValue
+                    Dim hexValue As String = Convert.ToString(decimalValue, 16)
+                    Unitshow.Text = $"{hexValue}"
+                Case "Decimal to ASCII Character"
+                    Dim success As Boolean = Double.TryParse(TextBox1.Text, inputValue)
+                    If success AndAlso inputValue >= 0 AndAlso inputValue <= 65535 Then
+                        Dim decimalValue As Long = CInt(inputValue)
+                        Dim outputChar As Char = ChrW(decimalValue)
+                        Unitshow.Text = $"{outputChar}"
+                    Else
+                        MessageBox.Show("Invalid input. Please enter a valid number within the range of 0 to 65535.")
+                    End If
+                Case "Decimal to Binary"
+                    Try
+                        Dim success As Boolean = Double.TryParse(TextBox1.Text, inputValue)
+                        If success Then
+                            Dim decimalValue As Long = CLng(inputValue)
+                            Dim binaryValue As String = Convert.ToString(decimalValue, 2)
+                            Unitshow.Text = $"{binaryValue}"
+                        Else
+                            MessageBox.Show("Invalid input. Please enter a valid number.")
+                        End If
+                    Catch ex As OverflowException
+                        MessageBox.Show("Input value is too large to convert to a decimal.")
+                    End Try
+
+                Case "Binary to Hexadecimal"
+                    Dim binaryValue As String = inputValue
+
+                    If IsBinary(binaryValue) Then
+                        Dim hexValue As String = Convert.ToInt64(binaryValue, 2).ToString("X")
+                        Unitshow.Text = $"{hexValue}"
+                    Else
+                        MessageBox.Show("Invalid binary input. Please enter a valid binary number.")
+                    End If
+                Case "Binary to ASCII Character"
+                    Dim binaryValue As String = inputValue
+                    Dim decimalValue As Long = Convert.ToUInt64(binaryValue, 2)
+
+                    If decimalValue >= 0 AndAlso decimalValue <= 65535 Then
+                        Dim outputChar As Char = ChrW(decimalValue)
+                        Unitshow.Text = $"{outputChar}"
+                    Else
+                        MessageBox.Show("The converted value is out of range for character representation.")
+                    End If
+                Case "Binary to Decimal"
+                    Dim binaryValue As String = inputValue
+                    Dim decimalValue As Integer = BinaryToDec(binaryValue)
+                    Unitshow.Text = $"{decimalValue}"
                 Case Else
                     MsgBox("Select a valid Unit of Conversion", vbInformation, "Info")
             End Select
@@ -221,7 +513,31 @@
         End If
     End Sub
 
+    Private Function BinaryToDec(input As String) As Integer
+        Dim array As Char() = input.ToCharArray()
+        array.Reverse(array)
+        Dim sum As Integer = 0
 
+        For i As Integer = 0 To array.Length - 1
+            If array(i) = "1" Then
+                If i = 0 Then
+                    sum += 1
+                Else
+                    sum += CInt(Math.Pow(2, i))
+                End If
+            End If
+        Next
+
+        Return sum
+    End Function
+    Private Function IsBinary(input As String) As Boolean
+        For Each c As Char In input
+            If c <> "0"c AndAlso c <> "1"c Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
 
     Private Sub btnBin_Click(sender As Object, e As EventArgs) Handles btnBin.Click
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
@@ -307,6 +623,7 @@
         ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
             txtAnswer.Text = ""
         End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             MessageBox.Show("Please enter a valid number to calculate Square.")
@@ -314,15 +631,25 @@
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Square operation.")
-            Return
-        End If
+        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        ' Perform the Sin operation
-        answer = Math.Sqrt(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If lblTop.Text <> "" Then
+            ' Perform the Square Root operation
+            answer = Math.Sqrt(lblTop.Text)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        ElseIf Not Double.TryParse(txtAnswer.Text, input) Then
+            MessageBox.Show("Invalid input for Square Root operation.")
+            Return
+        Else
+            ' Perform the Square Root operation
+            answer = Math.Sqrt(txtAnswer.Text)
+            txtAnswer.Text = answer.ToString()
+            lblTop.Text = ""
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        End If
     End Sub
 
 
@@ -360,19 +687,31 @@
         End Try
     End Function
 
+
     Private Sub OperationButton_Click(sender As Object, e As EventArgs) Handles btnAddition.Click, btnMultiplication.Click, btnModules.Click, btnMinus.Click, btnDivision.Click
+
         txtAnswer.Focus()
         If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
             txtAnswer.Text = ""
         ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
             txtAnswer.Text = ""
         End If
-        ' Store the operator as the last input
-        lastInput = DirectCast(sender, Button).Text
-        dotUsed = False
-        lastInputWasOperator = True
-        Dim button As Button = DirectCast(sender, Button)
-        txtAnswer.Text &= $" {button.Text} "
+
+        Dim operators As String = "+-*/%"
+        Dim lastCharIndex As Integer = txtAnswer.Text.LastIndexOfAny(operators.ToCharArray())
+
+        ' Check if the last input is an operator, and prevent adding consecutive operators
+        If lastCharIndex >= 0 AndAlso lastCharIndex = txtAnswer.Text.Length - 2 AndAlso operators.Contains(txtAnswer.Text.Chars(lastCharIndex)) Then
+            ' Replace the last operator with the current one
+            txtAnswer.Text = txtAnswer.Text.Remove(lastCharIndex) & DirectCast(sender, Button).Text & " "
+        Else
+            ' Store the operator as the last input
+            lastInput = DirectCast(sender, Button).Text
+            dotUsed = False
+            lastInputWasOperator = True
+            Dim button As Button = DirectCast(sender, Button)
+            txtAnswer.Text &= $" {button.Text} "
+        End If
     End Sub
     Private Sub btnPi_Click(sender As Object, e As EventArgs) Handles btnPi.Click
         txtAnswer.Focus()
@@ -415,102 +754,193 @@
     End Sub
 
 
-
-    Private Sub btnLeftBracket_Click(sender As Object, e As EventArgs) Handles btnLeftBracket.Click
-        txtAnswer.Focus()
-        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
-            txtAnswer.Text = ""
-        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
-            txtAnswer.Text = ""
-        End If
-        txtAnswer.Text &= "("
-    End Sub
-
-    Private Sub btnRightBracket_Click(sender As Object, e As EventArgs) Handles btnRightBracket.Click
-        txtAnswer.Focus()
-        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Then
-            txtAnswer.Text = ""
-        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Then
-            txtAnswer.Text = ""
-        End If
-        txtAnswer.Text &= ")"
-    End Sub
-
     Private Sub btnSin_Click(sender As Object, e As EventArgs) Handles btnSin.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate sine.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Sin(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Sin(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for sine operation.")
+            Return
+        End If
     End Sub
 
 
     Private Sub btnCos_Click(sender As Object, e As EventArgs) Handles btnCos.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate cosine.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Cos(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Cos(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for cosine operation.")
+            Return
+        End If
     End Sub
 
     Private Sub btnTan_Click(sender As Object, e As EventArgs) Handles btnTan.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate tangent.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Tan(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Tan(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for tangent operation.")
+            Return
+        End If
     End Sub
 
     Private Sub btnExponetial_Click(sender As Object, e As EventArgs) Handles btnExponetial.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
         ' Check if the input is empty or not a valid number
         If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Sin.")
+            MessageBox.Show("Please enter a valid number to calculate Exponential function.")
             Return
         End If
 
         Dim input As Double
-        If Not Double.TryParse(txtAnswer.Text, input) Then
-            MessageBox.Show("Invalid input for Sin operation.")
-            Return
+        Dim isValidNumber As Boolean = False
+        Dim newNode As TreeNode ' Declare newNode outside the condition
+
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
+            ' Check if the value is a valid number
+            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
+                ' Remove the "0x" prefix if present
+                Dim hexValue = lblTop.Text.Substring(2)
+                ' Check if the remaining text is a valid hexadecimal number
+                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
+                    isValidNumber = True
+                End If
+            Else
+                ' Check if the value is a valid decimal number
+                If Double.TryParse(lblTop.Text, input) Then
+                    isValidNumber = True
+                End If
+            End If
         End If
 
-        ' Perform the Sin operation
-        answer = Math.Exp(input)
-        txtAnswer.Text = answer.ToString()
-        lblTop.Text = ""
+        If isValidNumber Then
+            ' Perform the logarithm operation
+            answer = Math.Exp(input)
+            lblTop.Text = answer.ToString()
+            newNode = New TreeNode(answer.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Else
+            MessageBox.Show("Invalid input for Exponential function operation.")
+            Return
+        End If
     End Sub
 
     Private Function IsOperator(text As String) As Boolean
@@ -751,11 +1181,37 @@ Version 1.0.3(Official Build)")
     Private Sub AnswerHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnswerHistoryToolStripMenuItem.Click
         'Code for extend form
         Me.Height = 411
-        Me.Width = 587
+        Me.Width = 579
         txtAnswer.Width = 334
     End Sub
 
     Private Sub btnClearAnswerHistory_Click(sender As Object, e As EventArgs) Handles btnClearAnswerHistory.Click
         lstAnswer.Nodes.Clear()
+    End Sub
+
+    Private Sub ParenthesisButton_Click(sender As Object, e As EventArgs) Handles btnLeftBracket.Click, btnRightBracket.Click
+        Dim operators As String = "()"
+        Dim lastCharIndex As Integer = txtAnswer.Text.LastIndexOfAny(operators.ToCharArray())
+
+        ' Check if the last input is an operator, and prevent adding consecutive operators
+        If lastCharIndex >= 0 AndAlso lastCharIndex = txtAnswer.Text.Length - 2 AndAlso operators.Contains(txtAnswer.Text.Chars(lastCharIndex)) Then
+            ' Replace the last operator with the current one
+            txtAnswer.Text = txtAnswer.Text.Remove(lastCharIndex) & DirectCast(sender, Button).Text & " "
+        Else
+            ' Store the operator as the last input
+            lastInput = DirectCast(sender, Button).Text
+            dotUsed = False
+            lastInputWasOperator = True
+            Dim button As Button = DirectCast(sender, Button)
+            txtAnswer.Text &= $" {button.Text} "
+        End If
+    End Sub
+
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If WindowState = FormWindowState.Maximized Then
+            txtAnswer.Width = 334
+        ElseIf WindowState = FormWindowState.Normal Then
+            txtAnswer.Width = 266
+        End If
     End Sub
 End Class

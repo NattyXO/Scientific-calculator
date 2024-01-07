@@ -32,8 +32,6 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KeyboardShortcutReferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GithubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RealseNotesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutScientificCalculatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SendFeedbackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportAProblemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SuggestAFeatureToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -41,6 +39,9 @@ Partial Class Form1
         Me.YoutubeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LinkedinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FacebookToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RealseNotesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutScientificCalculatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AnswerHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnInput2 = New System.Windows.Forms.Button()
         Me.btnInput3 = New System.Windows.Forms.Button()
         Me.btnInput4 = New System.Windows.Forms.Button()
@@ -67,7 +68,6 @@ Partial Class Form1
         Me.btnExponetial = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Unitshow = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -85,9 +85,9 @@ Partial Class Form1
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnSquareRoot = New System.Windows.Forms.Button()
         Me.txtAnswer = New System.Windows.Forms.Label()
-        Me.AnswerHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lstAnswer = New System.Windows.Forms.TreeView()
         Me.btnClearAnswerHistory = New System.Windows.Forms.Button()
+        Me.Unitshow = New System.Windows.Forms.TextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -107,7 +107,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem, Me.AboutToolStripMenuItem, Me.AnswerHistoryToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(830, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(838, 24)
         Me.MenuStrip1.TabIndex = 2
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -121,19 +121,19 @@ Partial Class Form1
         'StandardToolStripMenuItem
         '
         Me.StandardToolStripMenuItem.Name = "StandardToolStripMenuItem"
-        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StandardToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.StandardToolStripMenuItem.Text = "Standard"
         '
         'ScientificToolStripMenuItem
         '
         Me.ScientificToolStripMenuItem.Name = "ScientificToolStripMenuItem"
-        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ScientificToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.ScientificToolStripMenuItem.Text = "Scientific"
         '
         'UnitConversionToolStripMenuItem
         '
         Me.UnitConversionToolStripMenuItem.Name = "UnitConversionToolStripMenuItem"
-        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UnitConversionToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.UnitConversionToolStripMenuItem.Text = "Unit Conversion"
         '
         'AboutToolStripMenuItem
@@ -155,18 +155,6 @@ Partial Class Form1
         Me.GithubToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
         Me.GithubToolStripMenuItem.Text = "Github"
         '
-        'RealseNotesToolStripMenuItem
-        '
-        Me.RealseNotesToolStripMenuItem.Name = "RealseNotesToolStripMenuItem"
-        Me.RealseNotesToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
-        Me.RealseNotesToolStripMenuItem.Text = "Release Notes"
-        '
-        'AboutScientificCalculatorToolStripMenuItem
-        '
-        Me.AboutScientificCalculatorToolStripMenuItem.Name = "AboutScientificCalculatorToolStripMenuItem"
-        Me.AboutScientificCalculatorToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
-        Me.AboutScientificCalculatorToolStripMenuItem.Text = "About Scientific Calculator"
-        '
         'SendFeedbackToolStripMenuItem
         '
         Me.SendFeedbackToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportAProblemToolStripMenuItem, Me.SuggestAFeatureToolStripMenuItem})
@@ -177,13 +165,13 @@ Partial Class Form1
         'ReportAProblemToolStripMenuItem
         '
         Me.ReportAProblemToolStripMenuItem.Name = "ReportAProblemToolStripMenuItem"
-        Me.ReportAProblemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ReportAProblemToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.ReportAProblemToolStripMenuItem.Text = "Report a Problem..."
         '
         'SuggestAFeatureToolStripMenuItem
         '
         Me.SuggestAFeatureToolStripMenuItem.Name = "SuggestAFeatureToolStripMenuItem"
-        Me.SuggestAFeatureToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SuggestAFeatureToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.SuggestAFeatureToolStripMenuItem.Text = "Suggest a Feature"
         '
         'JoinUsOnSocialMediaToolStripMenuItem
@@ -196,20 +184,38 @@ Partial Class Form1
         'YoutubeToolStripMenuItem
         '
         Me.YoutubeToolStripMenuItem.Name = "YoutubeToolStripMenuItem"
-        Me.YoutubeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.YoutubeToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.YoutubeToolStripMenuItem.Text = "Youtube"
         '
         'LinkedinToolStripMenuItem
         '
         Me.LinkedinToolStripMenuItem.Name = "LinkedinToolStripMenuItem"
-        Me.LinkedinToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LinkedinToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.LinkedinToolStripMenuItem.Text = "Linkedin"
         '
         'FacebookToolStripMenuItem
         '
         Me.FacebookToolStripMenuItem.Name = "FacebookToolStripMenuItem"
-        Me.FacebookToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FacebookToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.FacebookToolStripMenuItem.Text = "Facebook"
+        '
+        'RealseNotesToolStripMenuItem
+        '
+        Me.RealseNotesToolStripMenuItem.Name = "RealseNotesToolStripMenuItem"
+        Me.RealseNotesToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.RealseNotesToolStripMenuItem.Text = "Release Notes"
+        '
+        'AboutScientificCalculatorToolStripMenuItem
+        '
+        Me.AboutScientificCalculatorToolStripMenuItem.Name = "AboutScientificCalculatorToolStripMenuItem"
+        Me.AboutScientificCalculatorToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.AboutScientificCalculatorToolStripMenuItem.Text = "About Scientific Calculator"
+        '
+        'AnswerHistoryToolStripMenuItem
+        '
+        Me.AnswerHistoryToolStripMenuItem.Name = "AnswerHistoryToolStripMenuItem"
+        Me.AnswerHistoryToolStripMenuItem.Size = New System.Drawing.Size(99, 20)
+        Me.AnswerHistoryToolStripMenuItem.Text = "Answer History"
         '
         'btnInput2
         '
@@ -456,16 +462,16 @@ Partial Class Form1
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkTurquoise
-        Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.Unitshow)
+        Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Controls.Add(Me.btnUnitConvert)
         Me.Panel1.Controls.Add(Me.btnClearUnit)
-        Me.Panel1.Location = New System.Drawing.Point(575, 31)
+        Me.Panel1.Location = New System.Drawing.Point(572, 25)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(248, 336)
+        Me.Panel1.Size = New System.Drawing.Size(258, 342)
         Me.Panel1.TabIndex = 28
         '
         'TextBox1
@@ -476,17 +482,6 @@ Partial Class Form1
         Me.TextBox1.Size = New System.Drawing.Size(226, 22)
         Me.TextBox1.TabIndex = 18
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Unitshow
-        '
-        Me.Unitshow.BackColor = System.Drawing.Color.White
-        Me.Unitshow.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Unitshow.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Unitshow.Location = New System.Drawing.Point(21, 171)
-        Me.Unitshow.Name = "Unitshow"
-        Me.Unitshow.Size = New System.Drawing.Size(206, 51)
-        Me.Unitshow.TabIndex = 17
-        Me.Unitshow.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'Label5
         '
@@ -655,16 +650,10 @@ Partial Class Form1
         Me.txtAnswer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAnswer.Location = New System.Drawing.Point(21, 25)
         Me.txtAnswer.Name = "txtAnswer"
-        Me.txtAnswer.Size = New System.Drawing.Size(334, 57)
+        Me.txtAnswer.Size = New System.Drawing.Size(266, 57)
         Me.txtAnswer.TabIndex = 0
         Me.txtAnswer.Text = "0"
         Me.txtAnswer.TextAlign = System.Drawing.ContentAlignment.BottomRight
-        '
-        'AnswerHistoryToolStripMenuItem
-        '
-        Me.AnswerHistoryToolStripMenuItem.Name = "AnswerHistoryToolStripMenuItem"
-        Me.AnswerHistoryToolStripMenuItem.Size = New System.Drawing.Size(99, 20)
-        Me.AnswerHistoryToolStripMenuItem.Text = "Answer History"
         '
         'lstAnswer
         '
@@ -684,12 +673,22 @@ Partial Class Form1
         Me.btnClearAnswerHistory.Text = "Clear History"
         Me.btnClearAnswerHistory.UseVisualStyleBackColor = True
         '
+        'Unitshow
+        '
+        Me.Unitshow.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Unitshow.Location = New System.Drawing.Point(15, 164)
+        Me.Unitshow.Multiline = True
+        Me.Unitshow.Name = "Unitshow"
+        Me.Unitshow.Size = New System.Drawing.Size(226, 66)
+        Me.Unitshow.TabIndex = 19
+        Me.Unitshow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(830, 372)
+        Me.ClientSize = New System.Drawing.Size(838, 372)
         Me.Controls.Add(Me.btnClearAnswerHistory)
         Me.Controls.Add(Me.lstAnswer)
         Me.Controls.Add(Me.btnSquareRoot)
@@ -734,7 +733,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.MaximumSize = New System.Drawing.Size(846, 411)
+        Me.MaximumSize = New System.Drawing.Size(854, 411)
         Me.Name = "Form1"
         Me.Text = "Scientific Calculator"
         Me.MenuStrip1.ResumeLayout(False)
@@ -783,7 +782,6 @@ Partial Class Form1
     Friend WithEvents lblTop As Label
     Friend WithEvents btnUnitConvert As Button
     Friend WithEvents btnClearUnit As Button
-    Friend WithEvents Unitshow As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents btnLeftBracket As Button
     Friend WithEvents btnEuler As Button
@@ -810,4 +808,5 @@ Partial Class Form1
     Friend WithEvents AnswerHistoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lstAnswer As TreeView
     Friend WithEvents btnClearAnswerHistory As Button
+    Friend WithEvents Unitshow As TextBox
 End Class
