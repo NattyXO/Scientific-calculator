@@ -20,3 +20,4 @@
   - **Shift + '*':** Use this combination to insert the '*' character.
 - **Special Feature:**
   - **Ctrl + C:** Copy Selected Answer History to Clipboard
+  - **Enter:** To Perform calculation
