@@ -67,6 +67,7 @@ Partial Class Form1
         Me.btnLog = New System.Windows.Forms.Button()
         Me.btnExponetial = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Unitshow = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -87,7 +88,6 @@ Partial Class Form1
         Me.txtAnswer = New System.Windows.Forms.Label()
         Me.lstAnswer = New System.Windows.Forms.TreeView()
         Me.btnClearAnswerHistory = New System.Windows.Forms.Button()
-        Me.Unitshow = New System.Windows.Forms.TextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -474,6 +474,18 @@ Partial Class Form1
         Me.Panel1.Size = New System.Drawing.Size(258, 342)
         Me.Panel1.TabIndex = 28
         '
+        'Unitshow
+        '
+        Me.Unitshow.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Unitshow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Unitshow.Location = New System.Drawing.Point(15, 127)
+        Me.Unitshow.Multiline = True
+        Me.Unitshow.Name = "Unitshow"
+        Me.Unitshow.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.Unitshow.Size = New System.Drawing.Size(226, 139)
+        Me.Unitshow.TabIndex = 19
+        Me.Unitshow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -488,22 +500,22 @@ Partial Class Form1
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(7, 3)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(159, 21)
+        Me.Label5.Size = New System.Drawing.Size(104, 21)
         Me.Label5.TabIndex = 15
-        Me.Label5.Text = "Unit Conversion"
+        Me.Label5.Text = "Converter"
         '
         'Label4
         '
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label4.Location = New System.Drawing.Point(0, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(248, 18)
+        Me.Label4.Size = New System.Drawing.Size(258, 18)
         Me.Label4.TabIndex = 14
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(9, 46)
+        Me.ComboBox1.Location = New System.Drawing.Point(10, 46)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(236, 21)
         Me.ComboBox1.TabIndex = 13
@@ -512,7 +524,7 @@ Partial Class Form1
         '
         Me.btnUnitConvert.BackColor = System.Drawing.Color.Gray
         Me.btnUnitConvert.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUnitConvert.Location = New System.Drawing.Point(5, 265)
+        Me.btnUnitConvert.Location = New System.Drawing.Point(8, 279)
         Me.btnUnitConvert.Name = "btnUnitConvert"
         Me.btnUnitConvert.Size = New System.Drawing.Size(118, 52)
         Me.btnUnitConvert.TabIndex = 10
@@ -523,7 +535,7 @@ Partial Class Form1
         '
         Me.btnClearUnit.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.btnClearUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClearUnit.Location = New System.Drawing.Point(132, 265)
+        Me.btnClearUnit.Location = New System.Drawing.Point(135, 279)
         Me.btnClearUnit.Name = "btnClearUnit"
         Me.btnClearUnit.Size = New System.Drawing.Size(112, 52)
         Me.btnClearUnit.TabIndex = 9
@@ -672,16 +684,6 @@ Partial Class Form1
         Me.btnClearAnswerHistory.TabIndex = 41
         Me.btnClearAnswerHistory.Text = "Clear History"
         Me.btnClearAnswerHistory.UseVisualStyleBackColor = True
-        '
-        'Unitshow
-        '
-        Me.Unitshow.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Unitshow.Location = New System.Drawing.Point(15, 164)
-        Me.Unitshow.Multiline = True
-        Me.Unitshow.Name = "Unitshow"
-        Me.Unitshow.Size = New System.Drawing.Size(226, 66)
-        Me.Unitshow.TabIndex = 19
-        Me.Unitshow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Form1
         '

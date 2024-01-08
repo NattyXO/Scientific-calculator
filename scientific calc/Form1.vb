@@ -46,6 +46,8 @@ Public Class Form1
         txtAnswer.Width = 266
 
         ComboBox1.Text = "Choose one..."
+        ComboBox1.Items.Add("Geez to Numeral")
+        ComboBox1.Items.Add("Numeral to Geez")
         ComboBox1.Items.Add("Celsius to Fahrenheit")
         ComboBox1.Items.Add("Fahrenheit to Celsius")
         ComboBox1.Items.Add("Miles to Kilometres")
@@ -60,6 +62,9 @@ Public Class Form1
         ComboBox1.Items.Add("Binary to Hexadecimal")
         ComboBox1.Items.Add("Binary to ASCII Character")
         ComboBox1.Items.Add("Binary to Decimal")
+        ComboBox1.Items.Add("Roman to Numeral")
+        ComboBox1.Items.Add("Numeral to Roman")
+
 
     End Sub
     Private Function DecimalToHexadecimal(input As Decimal) As String
@@ -433,6 +438,14 @@ Public Class Form1
             Dim result As Double
             Select Case ComboBox1.SelectedItem.ToString()
                 ' ... (rest of your conversion cases)
+                Case "Geez to Numeral"
+                    Dim geezNumeral As String = binaryInput
+                    Dim numericValue As Integer = GeezToNumber(geezNumeral)
+                    Unitshow.Text = $"{numericValue}"
+                Case "Numeral to Geez"
+                    Dim number As Integer = binaryInput
+                    Dim geezNumeral As String = NumberToGeez(number)
+                    Unitshow.Text = $"{geezNumeral}"
                 Case "Celsius to Fahrenheit"
                     result = (9 / 5 * inputValue) + 32
                     Unitshow.Text = $"{result} Fahrenheit"
@@ -449,14 +462,17 @@ Public Class Form1
                     result = inputValue / 100
                     Unitshow.Text = $"{result} Metres"
                 Case "ASCII Character to Hexadecimal"
-                    result = Convert.ToString(Asc(binaryInput), 16)
-                    Unitshow.Text = $"{result}"
+                    Dim inputString As String = binaryInput
+                    Dim conversionResult As String = ConvertAsciiStringToHex(inputString)
+                    Unitshow.Text = conversionResult
                 Case "ASCII Character to Decimal"
-                    result = Asc(binaryInput)
-                    Unitshow.Text = $"{result}"
+                    Dim inputString As String = binaryInput
+                    Dim conversionResult As String = ConvertAsciiStringToDecimal(inputString)
+                    Unitshow.Text = conversionResult
                 Case "ASCII Character to Binary"
-                    result = Convert.ToString(Asc(binaryInput), 2)
-                    Unitshow.Text = $"{result}"
+                    Dim inputString As String = binaryInput
+                    Dim conversionResult As String = ConvertAsciiStringBinary(inputString)
+                    Unitshow.Text = conversionResult
                 Case "Decimal to Hexadecimal"
                     Dim decimalValue As Long = inputValue
                     Dim hexValue As String = Convert.ToString(decimalValue, 16)
@@ -473,11 +489,12 @@ Public Class Form1
                 Case "Decimal to Binary"
                     Dim parsedValue As Long
                     If Long.TryParse(decimaltobinaryinput, parsedValue) Then
-                        Dim binaryValue As String = DecimalToBinary(decimaltobinaryinput) ' Use the parsed value
+                        Dim binaryValue As String = DecimalToBinary(parsedValue)
                         Unitshow.Text = binaryValue ' Display the binary value
                     Else
                         MessageBox.Show("Invalid decimal input. Please enter a valid decimal number.")
                     End If
+
                 Case "Binary to Hexadecimal"
                     Dim binaryValue As String = binaryInput
                     Dim hexValue As String = Convert.ToInt64(binaryValue, 2).ToString("X")
@@ -496,6 +513,14 @@ Public Class Form1
                     Dim binaryNumber As String = binaryInput
                     Dim decimalResult As Long = BinaryToDecimal(binaryNumber)
                     Unitshow.Text = $"{decimalResult}"
+                Case "Roman to Numeral"
+                    Dim romanNumeral As String = binaryInput
+                    Dim numberValue As Integer = RomanToNumber(romanNumeral)
+                    Unitshow.Text = $"{numberValue}"
+                Case "Numeral to Roman"
+                    Dim inputNumber As Integer = binaryInput
+                    Dim romanNumeral As String = NumberToRoman(inputNumber)
+                    Unitshow.Text = $"{romanNumeral}"
                 Case Else
                     MsgBox("Select a valid Unit of Conversion", vbInformation, "Info")
             End Select
@@ -505,16 +530,184 @@ Public Class Form1
         End If
     End Sub
 
-    Function DecimalToBinary(decimalNumber As Long) As String
-        Dim binaryString As String = ""
+    Private Function RomanToNumber(romanNumeral As String) As Integer
+        Dim numeralValues As New Dictionary(Of Char, Integer) From {
+        {"I", 1}, {"V", 5}, {"X", 10}, {"L", 50},
+        {"C", 100}, {"D", 500}, {"M", 1000}
+    }
 
-        Do While decimalNumber > 0
-            binaryString = decimalNumber Mod 2 & binaryString ' Append remainder to the left
-            decimalNumber = decimalNumber \ 2  ' Integer division to get the next quotient
-        Loop
+        Dim result As Integer = 0
 
-        Return binaryString
+        For i As Integer = 0 To romanNumeral.Length - 1
+            If i + 1 < romanNumeral.Length AndAlso numeralValues(romanNumeral(i)) < numeralValues(romanNumeral(i + 1)) Then
+                result -= numeralValues(romanNumeral(i))
+            Else
+                result += numeralValues(romanNumeral(i))
+            End If
+        Next
+
+        Return result
     End Function
+
+    Private Function NumberToRoman(number As Integer) As String
+        If number <= 0 OrElse number >= 10001 Then
+            Return "Invalid number: Out of range" ' Handling out of range values
+        End If
+
+        Dim numeralMap As New Dictionary(Of Integer, String) From {
+        {10000, "X̅"}, {9000, "M'X̅"}, {5000, "V̅"}, {4000, "M'V̅"},
+        {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
+        {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
+        {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}
+    }
+
+        Dim result As New StringBuilder()
+
+        For Each kvp As KeyValuePair(Of Integer, String) In numeralMap
+            While number >= kvp.Key
+                result.Append(kvp.Value)
+                number -= kvp.Key
+            End While
+        Next
+
+        Return result.ToString()
+    End Function
+
+    Private Function GeezToNumber(geezString As String) As Integer
+        Dim geezMap As New Dictionary(Of Char, Integer) From {
+        {"፩", 1}, {"፪", 2}, {"፫", 3}, {"፬", 4}, {"፭", 5},
+        {"፮", 6}, {"፯", 7}, {"፰", 8}, {"፱", 9}, {"፲", 10},
+        {"፳", 20}, {"፴", 30}, {"፵", 40}, {"፶", 50}, {"፷", 60},
+        {"፸", 70}, {"፹", 80}, {"፺", 90}, {"፻", 100}, {"፼", 1000}
+    }
+
+        Dim result As Integer = 0
+        Dim currentValue As Integer = 0
+        Dim previousValue As Integer = 0
+
+        For i As Integer = geezString.Length - 1 To 0 Step -1
+            Dim currentChar As Char = geezString(i)
+
+            If geezMap.ContainsKey(currentChar) Then
+                Dim value As Integer = geezMap(currentChar)
+
+                If value >= previousValue Then
+                    result += value
+                Else
+                    result -= value
+                End If
+
+                previousValue = value
+            End If
+        Next
+
+        Return result
+    End Function
+
+
+    Private Function NumberToGeez(number As Integer) As String
+        If number <= 0 OrElse number >= 10000 Then
+            Return "Invalid number: Out of range" ' Handling out of range values
+        End If
+
+        Dim geezMap As New Dictionary(Of Integer, String) From {
+        {1000, "፼"}, {900, "፻፼"}, {800, "፸፼"}, {700, "፷፼"}, {600, "፶፼"},
+        {500, "፵፼"}, {400, "፴፼"}, {300, "፳፼"}, {200, "፲፼"}, {100, "፻"},
+        {90, "፺"}, {80, "፹"}, {70, "፸"}, {60, "፷"}, {50, "፵"},
+        {40, "፴"}, {30, "፳"}, {20, "፲"}, {10, "፲"}, {9, "፱"}, {8, "፰"},
+        {7, "፯"}, {6, "፮"}, {5, "፭"}, {4, "፬"}, {3, "፫"}, {2, "፪"}, {1, "፩"}
+    }
+
+        Dim result As New StringBuilder()
+
+        For Each kvp As KeyValuePair(Of Integer, String) In geezMap
+            While number >= kvp.Key
+                result.Append(kvp.Value)
+                number -= kvp.Key
+            End While
+        Next
+
+        Return result.ToString()
+    End Function
+
+    Private Function ConvertAsciiStringToHex(asciiString As String) As String
+        Dim resultBuilder As New StringBuilder()
+
+        For Each asciiChar As Char In asciiString
+            Dim asciiValue As Integer = Asc(asciiChar)
+
+            ' Convert ASCII value to hexadecimal 
+            Dim hexValue As String = Convert.ToString(asciiValue, 16).PadLeft(2, "0"c)
+
+            ' Format the output for each character
+            Dim formattedResult As String = $"{asciiChar}" & vbTab & $"{hexValue.ToUpper()}"
+            resultBuilder.AppendLine(formattedResult)
+        Next
+
+        Return resultBuilder.ToString().Trim()
+    End Function
+
+    Private Function ConvertAsciiStringToDecimal(asciiString As String) As String
+        Dim resultBuilder As New StringBuilder()
+
+        For Each asciiChar As Char In asciiString
+            Dim asciiValue As Integer = Asc(asciiChar)
+
+            ' Append the decimal value to the result
+            Dim formattedResult As String = $"{asciiChar}" & vbTab & $"{asciiValue}"
+            resultBuilder.AppendLine(formattedResult)
+        Next
+
+        Return resultBuilder.ToString().Trim()
+    End Function
+
+    Private Function ConvertAsciiStringBinary(asciiString As String) As String
+        Dim resultBuilder As New StringBuilder()
+
+        For Each asciiChar As Char In asciiString
+            Dim asciiValue As Integer = Asc(asciiChar)
+
+            ' Convert ASCII value to binary representation
+
+            Dim binaryValue As String = Convert.ToString(asciiValue, 2).PadLeft(8, "0"c)
+
+            ' Format the output for each character
+            Dim formattedResult As String = $"{asciiChar}" & vbTab & $"{binaryValue}"
+            resultBuilder.AppendLine(formattedResult)
+        Next
+
+        Return resultBuilder.ToString().Trim()
+    End Function
+
+    Private Function DecimalToBinary(decimalValue As Long) As String
+        If decimalValue = 0 Then
+            Return "0" ' Return "0" for input value 0
+        End If
+
+        Dim resultBuilder As New StringBuilder()
+        Dim isNegative As Boolean = False
+
+        ' Check if the input value is negative
+        If decimalValue < 0 Then
+            isNegative = True
+            decimalValue = Math.Abs(decimalValue) ' Get the absolute value for conversion
+        End If
+
+        ' Perform the binary conversion of the absolute value
+        While decimalValue > 0
+            resultBuilder.Insert(0, decimalValue Mod 2) ' Insert the remainder into the result
+            decimalValue \= 2 ' Integer division by 2
+        End While
+
+        Dim binaryResult As String = resultBuilder.ToString()
+
+        If isNegative Then
+            binaryResult = "-" & binaryResult ' Prepend "-" for negative numbers
+        End If
+
+        Return binaryResult
+    End Function
+
     Function BinaryToDecimal(binaryString As String) As Long
         Dim decimalValue As Long = 0
         Dim powerOfTwo As Long = 1
@@ -957,7 +1150,7 @@ Public Class Form1
 
     Private Sub AboutScientificCalculatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutScientificCalculatorToolStripMenuItem.Click
         ' About
-        MsgBox("Hi I Am NattyXO.This Is My First Scientific Calculator.
+        MessageBox.Show("Hi I Am NattyXO.This Is My First Scientific Calculator.
               
 Ahadu Tech Studio® 
 Scientific Calculator
@@ -1070,7 +1263,7 @@ Version 1.0.3(Official Build)")
         'MessageBox.Show($"You pressed key: {e.KeyCode}", "Key Pressed")
 
         ' Check if the Enter key is pressed
-        If e.KeyCode = Keys.Space Then
+        If e.KeyCode = Keys.Enter Then
             btnEqual.PerformClick()
         ElseIf e.KeyCode = Keys.NumPad0 Then
             btnInput0.PerformClick()
