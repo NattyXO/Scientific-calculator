@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports System
 Public Class Form1
 
     Dim firstInteger As Double
@@ -12,16 +13,16 @@ Public Class Form1
 
     Private Sub ScientificToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScientificToolStripMenuItem.Click
         'Code for extend form
-        Me.Height = 411
-        Me.Width = 579
-        txtAnswer.Width = 334
+        Me.Height = 419
+        Me.Width = 686
+        txtAnswer.Width = 396
     End Sub
 
     Private Sub UnitConversionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnitConversionToolStripMenuItem.Click
         'Code for extend form
-        Me.Height = 411
-        Me.Width = 854
-        txtAnswer.Width = 334
+        Me.Height = 419
+        Me.Width = 953
+        txtAnswer.Width = 396
     End Sub
 
     Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -32,18 +33,17 @@ Public Class Form1
 
     Private Sub StandardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StandardToolStripMenuItem.Click
         'Code for extend form
-        Me.Height = 411
-        Me.Width = 310
-        txtAnswer.Width = 267
+        Me.Height = 419
+        Me.Width = 289
+        txtAnswer.Width = 263
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.KeyPreview = True ' Enable key events for the form
 
-        Me.Height = 411
-        Me.Width = 310
-        btnEqual.Width = 131
-        txtAnswer.Width = 266
+        Me.Height = 419
+        Me.Width = 289
+        txtAnswer.Width = 263
 
         ComboBox1.Text = "Choose one..."
         ComboBox1.Items.Add("Geez to Numeral")
@@ -161,7 +161,6 @@ Public Class Form1
         Try
             ' Use the input value directly for conversion
             Dim hexValue As String = DecimalToHexadecimal(input)
-            lblTop.Text = hexValue.ToString()
             newNode = New TreeNode(hexValue.ToString())
             lstAnswer.Nodes.Add(newNode)
         Catch ex As OverflowException
@@ -179,43 +178,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Logarithm base 10.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Log10(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for Logarithm 10 base operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for common logarithmic.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim log10Value As String = Math.Log10(input)
+            newNode = New TreeNode(log10Value.ToString())
+            lblTop.Text = log10Value
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
 
@@ -227,43 +212,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate hyperbolic cosine.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Cosh(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for hyperbolic cosine operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for hyperbolic cosine.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim coshValue As String = Math.Cosh(input)
+            newNode = New TreeNode(coshValue.ToString())
+            lblTop.Text = coshValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
     Private Sub btnSinh_Click(sender As Object, e As EventArgs) Handles btnSinh.Click
@@ -274,43 +245,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate hyperbolic sine.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Sinh(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for hyperbolic sine operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for hyperbolic sine.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim sinhValue As String = Math.Sinh(input)
+            newNode = New TreeNode(sinhValue.ToString())
+            lblTop.Text = sinhValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
     Private Sub btnTanh_Click(sender As Object, e As EventArgs) Handles btnTanh.Click
@@ -321,43 +278,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate hyperbolic tangent.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Tanh(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for hyperbolic tangent operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for hyperbolic tangent.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim tanhValue As String = Math.Tanh(input)
+            newNode = New TreeNode(tanhValue.ToString())
+            lblTop.Text = tanhValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
     Private Sub btnln_Click(sender As Object, e As EventArgs) Handles btnln.Click
         txtAnswer.Focus()
@@ -367,42 +310,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
         Dim input As Double
-        Dim isvalidnumber As Boolean = False
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for log.")
+            Return
+        End If
+
         Dim newNode As TreeNode
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a hexadecimal string
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                isvalidnumber = True
-                ' Remove the "0x" prefix if present
-                lblTop.Text = lblTop.Text.Substring(2)
-            End If
-        End If
-
-        If isvalidnumber Then
-            ' Perform the logarithm operation on the hexadecimal value
-            If Not Double.TryParse(lblTop.Text, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                MessageBox.Show("Invalid input for Logarithm operation.")
-                Return
-            End If
-
-            ' Calculate the logarithm
-            answer = Math.Log(input)
-        Else
-            ' Perform the logarithm operation on the decimal value
-            If Not Double.TryParse(lblTop.Text, input) Then
-                MessageBox.Show("Invalid input for Logarithm operation.")
-                Return
-            End If
-
-            ' Calculate the logarithm
-            answer = Math.Log(input)
-        End If
-
-        lblTop.Text = answer.ToString()
-        newNode = New TreeNode(answer.ToString())
-        lstAnswer.Nodes.Add(newNode)
+        Try
+            ' Use the input value directly for conversion
+            Dim logValue As String = Math.Log(input)
+            newNode = New TreeNode(logValue.ToString())
+            lblTop.Text = logValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
 
     End Sub
 
@@ -728,19 +658,43 @@ Public Class Form1
 
 
     Private Sub btnBin_Click(sender As Object, e As EventArgs) Handles btnBin.Click
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MsgBox("Please enter a decimal number for conversion.", vbInformation, "Info")
-            Return
+        Dim decimalInput As Double
+
+        ' Check if lblTop.Text is a valid number and convert it to binary tree node
+        If Not String.IsNullOrWhiteSpace(lblTop.Text) AndAlso Double.TryParse(lblTop.Text, decimalInput) Then
+            ConvertAndDisplayBinaryTree(decimalInput)
         End If
 
-        Dim decimalInput As Double
-        If Not Double.TryParse(txtAnswer.Text, decimalInput) Then
+        ' Check if txtAnswer.Text is a valid number and convert it to binary tree node
+        Dim decimalInputTxt As Double
+        If Not String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso Double.TryParse(txtAnswer.Text, decimalInputTxt) Then
+            ConvertAndDisplayBinaryTree(decimalInputTxt)
+        ElseIf Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
             MsgBox("Please enter a valid decimal number for conversion.", vbInformation, "Info")
-            Return
         End If
+    End Sub
+
+
+
+    Private Sub ConvertAndDisplayBinaryTree(decimalInput As Double)
+        Dim binaryTree As TreeNode = ConvertDecimalToBinaryTree(decimalInput)
+        If binaryTree IsNot Nothing Then
+            lstAnswer.Nodes.Add(binaryTree)
+        End If
+    End Sub
+
+    Private Function ConvertDecimalToBinaryTree(decimalInput As Double) As TreeNode
+        Dim newNode As TreeNode = Nothing
 
         Try
-            ' Extract the integer part and fractional part of the decimal number
+            ' Extract the sign of the decimal number
+            Dim isNegative As Boolean = False
+            If decimalInput < 0 Then
+                isNegative = True
+                decimalInput = Math.Abs(decimalInput) ' Convert to positive for processing
+            End If
+
+            ' Extract the integer part and fractional part of the absolute decimal number
             Dim integerPart As Integer = CInt(Math.Truncate(decimalInput))
             Dim fractionalPart As Double = decimalInput - integerPart
 
@@ -769,20 +723,26 @@ Public Class Form1
                 End If
             Next
 
-            ' Display the result in Label3
-            txtAnswer.Text = binaryIntegerPart & binaryFractionalPart.ToString()
-            lblTop.Visible = False
+            ' Construct the final binary representation
+            Dim binaryResult As String = binaryIntegerPart & binaryFractionalPart.ToString()
+
+            ' Display the result in Label3 with the sign
+            If isNegative Then
+                binaryResult = "-" & binaryResult
+            End If
+
+            newNode = New TreeNode(binaryResult.ToString())
 
         Catch ex As OverflowException
             MessageBox.Show("An overflow occurred. The number entered is too large to convert.", "Overflow Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txtAnswer.Text = ""
-            lblTop.Visible = True
         End Try
-    End Sub
+
+        Return newNode
+    End Function
+
 
     Private Sub btnEqual_Click(sender As Object, e As EventArgs) Handles btnEqual.Click
 
-        lblTop.Visible = True
         Dim result As Double = Calculate(txtAnswer.Text)
         If Not Double.IsNaN(result) Then
             ' Add the result to the TreeView
@@ -791,7 +751,7 @@ Public Class Form1
 
             ' Set the result to the top label
             lblTop.Text = result.ToString()
-            lblTop.Visible = True
+
         Else
             ' Optionally handle invalid expressions or errors here
         End If
@@ -950,43 +910,30 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate sine.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Sin(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for sine operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Sin.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim sinValue As String = Math.Sin(input)
+            newNode = New TreeNode(sinValue.ToString())
+            lblTop.Text = sinValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+
     End Sub
 
 
@@ -998,43 +945,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate cosine.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Cos(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for cosine operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Cos.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim cosValue As String = Math.Cos(input)
+            newNode = New TreeNode(cosValue.ToString())
+            lblTop.Text = cosValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
     Private Sub btnTan_Click(sender As Object, e As EventArgs) Handles btnTan.Click
@@ -1045,43 +978,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate tangent.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Tan(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for tangent operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Tan.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim tanValue As String = Math.Tan(input)
+            newNode = New TreeNode(tanValue.ToString())
+            lblTop.Text = tanValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
     Private Sub btnExponetial_Click(sender As Object, e As EventArgs) Handles btnExponetial.Click
@@ -1092,43 +1011,29 @@ Public Class Form1
             txtAnswer.Text = ""
         End If
 
-        ' Check if the input is empty or not a valid number
-        If String.IsNullOrWhiteSpace(txtAnswer.Text) Then
-            MessageBox.Show("Please enter a valid number to calculate Exponential function.")
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
             Return
         End If
 
         Dim input As Double
-        Dim isValidNumber As Boolean = False
-        Dim newNode As TreeNode ' Declare newNode outside the condition
 
-        If Not String.IsNullOrWhiteSpace(lblTop.Text) Then
-            ' Check if the value is a valid number
-            If lblTop.Text.StartsWith("0x", StringComparison.OrdinalIgnoreCase) Then
-                ' Remove the "0x" prefix if present
-                Dim hexValue = lblTop.Text.Substring(2)
-                ' Check if the remaining text is a valid hexadecimal number
-                If Double.TryParse(hexValue, Globalization.NumberStyles.HexNumber, Nothing, input) Then
-                    isValidNumber = True
-                End If
-            Else
-                ' Check if the value is a valid decimal number
-                If Double.TryParse(lblTop.Text, input) Then
-                    isValidNumber = True
-                End If
-            End If
-        End If
-
-        If isValidNumber Then
-            ' Perform the logarithm operation
-            answer = Math.Exp(input)
-            lblTop.Text = answer.ToString()
-            newNode = New TreeNode(answer.ToString())
-            lstAnswer.Nodes.Add(newNode)
-        Else
-            MessageBox.Show("Invalid input for Exponential function operation.")
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Exponential.")
             Return
         End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim expValue As String = Math.Exp(input)
+            newNode = New TreeNode(expValue.ToString())
+            lblTop.Text = expValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
     End Sub
 
     Private Function IsOperator(text As String) As Boolean
@@ -1305,7 +1210,12 @@ Version 1.0.3(Official Build)")
         ElseIf e.KeyCode = Keys.C AndAlso e.Control AndAlso lstAnswer.SelectedNode IsNot Nothing Then
             ' Copy the selected node's text to the clipboard
             Clipboard.SetText(lstAnswer.SelectedNode.Text)
-
+        ElseIf e.KeyCode = Keys.C AndAlso e.Shift Then
+            btnClearUnit.PerformClick()
+        ElseIf e.KeyCode = Keys.C AndAlso e.Alt Then
+            btnClearAnswerHistory.PerformClick()
+        ElseIf e.KeyCode = Keys.V Then ' "Converter" key
+            btnUnitConvert.PerformClick()
         ElseIf e.KeyCode = Keys.Back Then ' "back" key
             btnBack.PerformClick()
         ElseIf e.KeyCode = Keys.C Then ' "clear" key
@@ -1368,9 +1278,9 @@ Version 1.0.3(Official Build)")
 
     Private Sub AnswerHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnswerHistoryToolStripMenuItem.Click
         'Code for extend form
-        Me.Height = 411
-        Me.Width = 579
-        txtAnswer.Width = 334
+        Me.Height = 419
+        Me.Width = 686
+        txtAnswer.Width = 396
     End Sub
 
     Private Sub btnClearAnswerHistory_Click(sender As Object, e As EventArgs) Handles btnClearAnswerHistory.Click
@@ -1397,9 +1307,362 @@ Version 1.0.3(Official Build)")
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If WindowState = FormWindowState.Maximized Then
-            txtAnswer.Width = 334
+            txtAnswer.Width = 396
         ElseIf WindowState = FormWindowState.Normal Then
-            txtAnswer.Width = 266
+            txtAnswer.Width = 263
         End If
     End Sub
+
+    Private Sub btnTenPowerOfX_Click(sender As Object, e As EventArgs) Handles btnTenPowerOfX.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for 10x.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim result As String = TenToThePowerOfX(input)
+            newNode = New TreeNode(result.ToString())
+            lblTop.Text = result
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+
+    Private Function TenToThePowerOfX(x As Integer) As Long
+        If x = 0 Then Return "1"
+
+        Dim result As String = "10"
+
+        For i As Integer = 2 To x
+            result = MultiplyBy10(result)
+        Next
+
+        Return result
+    End Function
+
+    Private Function MultiplyBy10(value As String) As String
+        Dim carry As Integer = 0
+        Dim result As String = ""
+
+        For i As Integer = value.Length - 1 To 0 Step -1
+            Dim digit As Integer = Convert.ToInt32(value(i).ToString())
+            Dim product As Integer = digit * 10 + carry
+
+            result = (product Mod 10).ToString() & result
+            carry = product \ 10
+        Next
+
+        If carry > 0 Then
+            result = carry.ToString() & result
+        End If
+
+        Return result
+    End Function
+
+    Private Sub btnSecant_Click(sender As Object, e As EventArgs) Handles btnSecant.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for log.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim secantValue As Double = TrigonometryFunctions.Secant(input)
+            newNode = New TreeNode(secantValue.ToString())
+            lblTop.Text = secantValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+
+    Public Class TrigonometryFunctions
+        Public Shared Function Secant(angle As Double) As Double
+            ' Ensure the angle is in radians for the Math.Cos function
+            Dim radians As Double = angle * (Math.PI / 180.0)
+
+            ' Calculate cosine value
+            Dim cosineValue As Double = Math.Cos(radians)
+
+            ' Check if the cosine value is very close to zero to prevent division by zero
+            If Math.Abs(cosineValue) < Double.Epsilon Then
+                Throw New ArgumentException("Invalid angle. Cosine value is zero.")
+            End If
+
+            ' Calculate secant as the reciprocal of cosine
+            Return 1 / cosineValue
+        End Function
+
+        Public Shared Function Cosecant(angle As Double) As Double
+            ' Ensure the angle is in radians for the Math.Sin function
+            Dim radians As Double = angle * (Math.PI / 180.0)
+
+            ' Calculate sine value
+            Dim sineValue As Double = Math.Sin(radians)
+
+            ' Check if the sine value is very close to zero to prevent division by zero
+            If Math.Abs(sineValue) < Double.Epsilon Then
+                Throw New ArgumentException("Invalid angle. Sine value is zero.")
+            End If
+
+            ' Calculate cosecant as the reciprocal of sine
+            Return 1 / sineValue
+        End Function
+
+        Public Shared Function Cotangent(angle As Double) As Double
+            ' Ensure the angle is in radians for the Math.Tan function
+            Dim radians As Double = angle * (Math.PI / 180.0)
+
+            ' Calculate tangent value
+            Dim tangentValue As Double = Math.Tan(radians)
+
+            ' Check if the tangent value is very close to zero to prevent division by zero
+            If Math.Abs(tangentValue) < Double.Epsilon Then
+                Throw New ArgumentException("Invalid angle. Tangent value is zero.")
+            End If
+
+            ' Calculate cotangent as the reciprocal of tangent
+            Return 1 / tangentValue
+        End Function
+    End Class
+
+    Private Sub btnCosecant_Click(sender As Object, e As EventArgs) Handles btnCosecant.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Cosecant.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim cosecantValue As Double = TrigonometryFunctions.Cosecant(input)
+            newNode = New TreeNode(cosecantValue.ToString())
+            lblTop.Text = cosecantValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+
+    Private Sub btnCotangent_Click(sender As Object, e As EventArgs) Handles btnCotangent.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for Cotangent.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim cotangentValue As Double = TrigonometryFunctions.Cotangent(input)
+            newNode = New TreeNode(cotangentValue.ToString())
+            lblTop.Text = cotangentValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+
+    Private Sub btnOneOverTwo_Click(sender As Object, e As EventArgs) Handles btnOneOverTwo.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for X.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim xValue As Double = Reciprocal(input)
+            newNode = New TreeNode(xValue.ToString())
+            lblTop.Text = xValue
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+
+    Public Function Reciprocal(x As Double) As Double
+        Try
+            If x = 0 Then
+                Throw New ArgumentException("Division by zero is not allowed.")
+            End If
+
+            Return 1 / x
+        Catch ex As ArgumentException
+            MessageBox.Show(ex.Message, "Division Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return Double.NaN ' Return a default value to indicate an error (you can change this as needed)
+        End Try
+    End Function
+
+
+    Private Sub btnXPowerOfTwo_Click(sender As Object, e As EventArgs) Handles btnXPowerOfTwo.Click
+        txtAnswer.Focus()
+        If txtAnswer.Text = "∞" Or txtAnswer.Text = "∞ " Or lblTop.Text = "∞" Or lblTop.Text = "∞ " Then
+            txtAnswer.Text = ""
+        ElseIf txtAnswer.Text = "NaN" Or txtAnswer.Text = "NaN " Or lblTop.Text = "NaN" Or lblTop.Text = "NaN " Then
+            txtAnswer.Text = ""
+        End If
+
+        If String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso String.IsNullOrWhiteSpace(lblTop.Text) Then
+            MessageBox.Show("Please enter a valid number to convert.")
+            Return
+        End If
+
+        Dim input As Double
+
+        If Not Double.TryParse(txtAnswer.Text, input) AndAlso Not Double.TryParse(lblTop.Text, input) Then
+            MessageBox.Show("Invalid input for X.")
+            Return
+        End If
+
+        Dim newNode As TreeNode
+
+        Try
+            ' Use the input value directly for conversion
+            Dim xValue As Double = Square(input)
+            lblTop.Text = xValue
+            newNode = New TreeNode(xValue.ToString())
+            lstAnswer.Nodes.Add(newNode)
+        Catch ex As OverflowException
+            MessageBox.Show("The number is too large.")
+        End Try
+    End Sub
+    Public Function Square(x As Double) As Double
+        Return x * x
+    End Function
+
+    Private isNegative As Boolean = False ' Global variable to track the sign
+
+    Private Sub btnNegate_Click(sender As Object, e As EventArgs) Handles btnNegate.Click
+        If Not String.IsNullOrWhiteSpace(txtAnswer.Text) Then
+            Dim currentValue As Double
+            If Double.TryParse(txtAnswer.Text, currentValue) Then
+                If isNegative Then
+                    currentValue = Math.Abs(currentValue) ' Convert to positive
+                    isNegative = False
+                Else
+                    currentValue = -currentValue ' Convert to negative
+                    isNegative = True
+                End If
+                txtAnswer.Text = currentValue.ToString()
+            Else
+                MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Else
+            MessageBox.Show("Please enter a number first.", "No Input", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private isFirstNumberEntered As Boolean = False ' Global variable to track the entry sequence
+    Private xValue As Double  ' Global variable to store the first number entered
+
+    Private Sub btnXPowerOfY_Click(sender As Object, e As EventArgs) Handles btnXPowerOfY.Click
+        If isFirstNumberEntered Then
+            ' Y value
+            Dim yValue As Double
+            Dim newNode As TreeNode
+            If Not String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso Double.TryParse(txtAnswer.Text, yValue) Then
+                ' Calculate x^y
+                Dim result As Double = Math.Pow(xValue, yValue)
+                newNode = New TreeNode(result.ToString())
+                lblTop.Text = result
+                lstAnswer.Nodes.Add(newNode)
+                txtAnswer.Text = $"{xValue}^{yValue}" ' Display x^y
+
+            Else
+                MessageBox.Show("Please enter a valid number for Y.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+            isFirstNumberEntered = False
+            xValue = Nothing ' Reset xValue after calculation
+        Else
+            ' X value
+            If Not String.IsNullOrWhiteSpace(txtAnswer.Text) AndAlso Double.TryParse(txtAnswer.Text, xValue) Then
+                isFirstNumberEntered = True ' Flag that the first number has been entered
+                lblTop.Text = $"{xValue}^" ' Display x^
+                txtAnswer.Text = "" ' Clear the textbox for the next entry (Y value)
+            Else
+                MessageBox.Show("Please enter a valid number for X.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+
 End Class
